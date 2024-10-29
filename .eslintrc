@@ -1,0 +1,53 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    // project: './tsconfig.json',
+    "tsconfigRootDir": "__dirname"
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended",
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "env": {
+    "browser": true,
+    "es2024": true
+  },
+  "rules": {
+    "linebreak-style": 0,
+    // 싱글 쿼터 사용
+    "quotes": ["error", "single"],
+    "prettier/prettier": "error",
+    "@typescript-eslint/quotes": ["error", "single"],
+    // 사용 안한 변수 경고
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    // 선언 전 사용 시 경고
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "warn",
+    // 아래 확장자들은 import 시 확장자 생략
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "jsx": "never"
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
