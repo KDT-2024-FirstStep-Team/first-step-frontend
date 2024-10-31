@@ -27,7 +27,14 @@ const NavBar = () => {
   );
 };
 
-const navItems = [
+interface NavItemType {
+  name: string;
+  path: string;
+  activeIcon: string;
+  inactiveIcon: string;
+}
+
+const navItems: NavItemType[] = [
   {
     name: '홈',
     path: '/',
