@@ -66,6 +66,18 @@
   }
 }
 
+* {
+  position: relative;
+  margin: 0 auto;
+  height: 100dvh;
+  min-width: 296px;
+  min-height: 500px;
+  max-width: 600px;
+  background-color: var(--background);
+  font-weight: 400;
+  color: var(--black);
+}
+
 @font-face {
   font-family: Pretendard;
   font-weight: 400;
