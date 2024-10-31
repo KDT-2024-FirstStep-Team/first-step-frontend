@@ -65,3 +65,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+@font-face {
+  font-family: Pretendard;
+  font-weight: 400;
+  src:
+    local('Pretandard Regular'),
+    url('./assets/fonts/Pretendard-Regular.woff') format('woff');
+}
+@font-face {
+  font-family: Pretendard;
+  font-weight: 500;
+  src:
+    local('Pretandard Medium'),
+    url('./assets/fonts/Pretendard-Medium.woff') format('woff');
+}
+@font-face {
+  font-family: Pretendard;
+  font-weight: 700;
+  src:
+    local('Pretandard Bold'),
+    url('./assets/fonts/Pretendard-Bold.woff') format('woff');
+}
