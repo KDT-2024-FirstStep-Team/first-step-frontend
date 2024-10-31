@@ -5,7 +5,7 @@ const NavBar = () => {
   const location = useLocation();
 
   return (
-    <Nav>
+    <Nav className="app-container">
       {navItems.map((item) => (
         <NavItem
           key={item.path}
@@ -27,14 +27,14 @@ const NavBar = () => {
   );
 };
 
-interface NavItemType {
+interface NavItem {
   name: string;
   path: string;
   activeIcon: string;
   inactiveIcon: string;
 }
 
-const navItems: NavItemType[] = [
+const navItems: NavItem[] = [
   {
     name: '홈',
     path: '/',

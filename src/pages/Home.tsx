@@ -1,9 +1,7 @@
+import BestContentBanner from '@/components/BestContentBanner';
+
 const Home = () => {
-  return (
-    <>
-      <h1 className="text-2xl font-bold">홈페이지</h1>
-    </>
-  );
+  return <BestContentBanner />;
 };
 
 export default Home;
