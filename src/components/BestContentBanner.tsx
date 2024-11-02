@@ -4,7 +4,7 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselApi
+  CarouselApi,
 } from './ui/carousel';
 import { useState, useEffect } from 'react';
 
@@ -57,16 +57,16 @@ interface ContentItem {
 const contentItems: ContentItem[] = [
   {
     title: '말 한마디에 천 냥 빚도 갚는다? 부부 갈등 해결의 비법!',
-    path: '/community' // 게시글 아이디 있어야 할 듯
+    path: '/community', // 게시글 아이디 있어야 할 듯
   },
   {
     title: '신혼집 정리의 기술, 공간은 좁아도 사랑은 넓어진다.',
-    path: '/community' // 게시글 아이디 있어야 할 듯
+    path: '/community', // 게시글 아이디 있어야 할 듯
   },
   {
     title: '서로의 사랑의 언어를 찾아라! 행복한 결혼의 시작',
-    path: '/community' // 게시글 아이디 있어야 할 듯
-  }
+    path: '/community', // 게시글 아이디 있어야 할 듯
+  },
 ];
 
 const StyledCarouselItem = styled(CarouselItem)<{ $backgroundImage: string }>`
@@ -80,21 +80,24 @@ const StyledCarouselItem = styled(CarouselItem)<{ $backgroundImage: string }>`
 
   p {
     font-size: 22px;
-    font-weight: bold;
-    color: #343232;
+    font-weight: 600;
+    color: var(--gr30);
+    line-height: 140%;
+    letter-spacing: -0.242px;
   }
 `;
 
 const StyledLink = styled(Link)`
-  color: #8f8a8a;
+  color: var(--gr50);
   position: absolute;
   top: 46%;
+  line-height: 100%;
 `;
 
 const StyledP = styled.p`
   background-color: rgba(53, 49, 53, 0.6);
   padding: 0.25rem 0.625rem;
-  color: #ffffff;
+  color: var(--gr100);
   font-size: 11px;
   border-radius: 12px;
   position: absolute;
