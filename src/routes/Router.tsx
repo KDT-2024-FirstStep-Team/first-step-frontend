@@ -8,6 +8,10 @@ import Notification from '@/pages/Notification.tsx';
 import ConsultantChatBot from '@/pages/ConsultantChatBot.tsx';
 import Search from '@/pages/Search.tsx';
 import Analysis from '@/pages/Analysis.tsx';
+import SelectLogin from '@/pages/SelectLogin.tsx';
+import Login from '@/pages/Login.tsx';
+import SignUp from '@/pages/SignUp.tsx';
+import Password from '@/pages/Password.tsx';
 
 function Router() {
   return (
@@ -21,6 +25,10 @@ function Router() {
       <Route path="/consultant-chatbot" element={<ConsultantChatBot />} />
       <Route path="/search" element={<Search />} />
       <Route path="/analysis" element={<Analysis />} />
+      <Route path="/select-login" element={<SelectLogin />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/password" element={<Password />} />
       {/* 추가 라우트 */}
     </Routes>
   );
