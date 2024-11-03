@@ -6,6 +6,8 @@ interface TextInputProps {
   placeholder: string;
   checkAvailability?: (value: string) => Promise<boolean>; // 중복 확인 함수 (선택)
   saveToBackend?: (value: string) => Promise<void>; // 백엔드 저장 함수 (선택)
+  type?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -13,6 +15,8 @@ const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   checkAvailability,
   saveToBackend,
+  type = 'text',
+  onChange,
 }) => {
   const [value, setValue] = useState('');
   const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
@@ -20,8 +24,9 @@ const TextInput: React.FC<TextInputProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    setIsAvailable(null); // 텍스트 변경 시 상태 초기화
+    setIsAvailable(null);
     setMessage('');
+    if (onChange) onChange(e);
   };
 
   const handleCheckAndSave = async () => {
@@ -45,24 +50,23 @@ const TextInput: React.FC<TextInputProps> = ({
   return (
     <Container>
       <Label>{label}</Label>
-      <InputContainer isAvailable={isAvailable}>
+      <InputContainer $isAvailable={isAvailable}>
         <StyledInput
-          type="text"
+          type={type}
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
           onBlur={checkAvailability ? handleCheckAndSave : undefined} // 중복 검사 (선택)
         />
       </InputContainer>
-      {message && <Message isAvailable={isAvailable}>{message}</Message>}
+      {message && <Message $isAvailable={isAvailable}>{message}</Message>}
     </Container>
   );
 };
 
-// 스타일 컴포넌트들
 const Container = styled.div`
   width: 335px;
-  margin: 20px auto;
+  margin: auto;
 `;
 
 const Label = styled.label`
@@ -73,16 +77,16 @@ const Label = styled.label`
   margin-left: 2px;
 `;
 
-const InputContainer = styled.div<{ isAvailable: boolean | null }>`
+const InputContainer = styled.div<{ $isAvailable: boolean | null }>`
   display: flex;
   align-items: center;
   padding: 0 20px;
   background-color: var(--gr100);
   border: 0.75px solid
     ${(props) =>
-      props.isAvailable === null
+      props.$isAvailable === null
         ? 'var(--gr60)'
-        : props.isAvailable
+        : props.$isAvailable
           ? '#2CAD5A'
           : '#AB291A'};
   border-radius: 8px;
@@ -106,11 +110,11 @@ const StyledInput = styled.input`
   }
 `;
 
-const Message = styled.p<{ isAvailable: boolean | null }>`
+const Message = styled.p<{ $isAvailable: boolean | null }>`
   font-size: 15px;
   font-weight: 400;
   line-height: 100%;
-  color: ${(props) => (props.isAvailable ? '#2CAD5A' : '#AB291A')};
+  color: ${(props) => (props.$isAvailable ? '#2CAD5A' : '#AB291A')};
   margin-top: 12px;
   margin-left: 2px;
 `;
