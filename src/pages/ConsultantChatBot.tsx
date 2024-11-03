@@ -1,4 +1,3 @@
-import React from 'react';
 import BackHeader from '@/components/BackHeader';
 
 const ConsultantChatBot: React.FC = () => {
