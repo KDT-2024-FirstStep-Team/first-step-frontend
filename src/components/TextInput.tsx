@@ -6,7 +6,6 @@ interface TextInputProps {
   placeholder: string;
   checkAvailability?: (value: string) => Promise<boolean>; // 중복 확인 함수 (선택)
   saveToBackend?: (value: string) => Promise<void>; // 백엔드 저장 함수 (선택)
-  disabled?: boolean; // 비활성화 여부
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -14,7 +13,6 @@ const TextInput: React.FC<TextInputProps> = ({
   placeholder,
   checkAvailability,
   saveToBackend,
-  disabled = false,
 }) => {
   const [value, setValue] = useState('');
   const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
@@ -29,13 +27,17 @@ const TextInput: React.FC<TextInputProps> = ({
   const handleCheckAndSave = async () => {
     if (value && checkAvailability) {
       // 중복 검사 함수가 제공된 경우
-      const available = await checkAvailability(value);
-      setIsAvailable(available);
-      setMessage(available ? '사용 가능합니다' : '이미 사용 중입니다');
+      try {
+        const available = await checkAvailability(value);
+        setIsAvailable(available);
+        setMessage(available ? '사용 가능합니다' : '이미 사용 중입니다');
 
-      if (available && saveToBackend) {
-        // 중복 검사 통과 시 저장 함수 실행
-        await saveToBackend(value);
+        if (available && saveToBackend) {
+          // 중복 검사 통과 시 저장 함수 실행
+          await saveToBackend(value);
+        }
+      } catch (error) {
+        console.error('Error during availability check:', error);
       }
     }
   };
@@ -43,14 +45,13 @@ const TextInput: React.FC<TextInputProps> = ({
   return (
     <Container>
       <Label>{label}</Label>
-      <InputContainer isAvailable={isAvailable} disabled={disabled}>
+      <InputContainer isAvailable={isAvailable}>
         <StyledInput
           type="text"
           placeholder={placeholder}
           value={value}
           onChange={handleChange}
           onBlur={checkAvailability ? handleCheckAndSave : undefined} // 중복 검사 (선택)
-          disabled={disabled} // 비활성화 상태 적용
         />
       </InputContainer>
       {message && <Message isAvailable={isAvailable}>{message}</Message>}
@@ -58,6 +59,7 @@ const TextInput: React.FC<TextInputProps> = ({
   );
 };
 
+// 스타일 컴포넌트들
 const Container = styled.div`
   width: 335px;
   margin: 20px auto;
@@ -71,15 +73,11 @@ const Label = styled.label`
   margin-left: 2px;
 `;
 
-const InputContainer = styled.div<{
-  isAvailable: boolean | null;
-  disabled: boolean;
-}>`
+const InputContainer = styled.div<{ isAvailable: boolean | null }>`
   display: flex;
   align-items: center;
   padding: 0 20px;
-  background-color: ${(props) =>
-    props.disabled ? 'var(--gr80)' : 'var(--gr100)'};
+  background-color: var(--gr100);
   border: 0.75px solid
     ${(props) =>
       props.isAvailable === null
@@ -90,7 +88,6 @@ const InputContainer = styled.div<{
   border-radius: 8px;
   margin-top: 2px;
   height: 56px;
-  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 `;
 
 const StyledInput = styled.input`
@@ -107,12 +104,6 @@ const StyledInput = styled.input`
   &::placeholder {
     color: var(--gr60);
   }
-
-  &:disabled {
-    color: var(--gr60);
-    background-color: var(--gr90);
-    cursor: not-allowed;
-  }
 `;
 
 const Message = styled.p<{ isAvailable: boolean | null }>`
@@ -121,6 +112,7 @@ const Message = styled.p<{ isAvailable: boolean | null }>`
   line-height: 100%;
   color: ${(props) => (props.isAvailable ? '#2CAD5A' : '#AB291A')};
   margin-top: 12px;
+  margin-left: 2px;
 `;
 
 export default TextInput;
