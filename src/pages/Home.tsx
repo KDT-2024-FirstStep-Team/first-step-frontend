@@ -1,4 +1,3 @@
-import React from 'react';
 import BestContentBanner from '@/components/BestContentBanner';
 import HomeHeader from '@/components/HomeHeader';
 const Home = () => {
