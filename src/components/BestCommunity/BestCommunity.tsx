@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 import BestCommunityCard from './BestCommunityCard';
-import { Link } from 'react-router-dom';
+import CategoryHeader from '../shared/CategoryHeader';
 
 const BestCommunity = () => {
   return (
     <>
-      <BestCommunityHeader>
-        <HeaderText>커뮤니티 베스트</HeaderText>
-        <NavText to={'/community'}>전체보기 &gt;</NavText>
-      </BestCommunityHeader>
-
+      <CategoryHeader title="커뮤니티 베스트"></CategoryHeader>
       <BestCommunityCardsContainer>
         {communityData.map((item, index) => (
           <BestCommunityCard
@@ -55,27 +51,6 @@ const communityData: CommunityData[] = [
     date: new Date('2024-10-25')
   }
 ];
-
-const BestCommunityHeader = styled.div`
-  width: 100%;
-  height: 50px;
-  padding: 0px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const HeaderText = styled.span`
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--gr20);
-`;
-
-const NavText = styled(Link)`
-  font-size: 12px;
-  color: var(--gr50);
-  font-weight: 400;
-`;
 
 const BestCommunityCardsContainer = styled.div`
   display: flex;
