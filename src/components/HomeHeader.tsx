@@ -2,6 +2,26 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+const HomeHeader: React.FC = () => {
+  const navigate = useNavigate();
+
+  return (
+    <HeaderContainer>
+      {/* 로고 클릭 시 루트 경로로 이동 */}
+      <Logo src="/icons/logo.svg" alt="Logo" onClick={() => navigate('/')} />
+      <IconButton onClick={() => navigate('/notification')}>
+        <img src="/icons/notification.svg" alt="Notification" />
+      </IconButton>
+      <IconButton onClick={() => navigate('/mypage')}>
+        <img src="/icons/mypage.svg" alt="My Page" />
+      </IconButton>
+      <CounselorButton onClick={() => alert('상담사로 전환됩니다.')}>
+        상담사 전환
+      </CounselorButton>
+    </HeaderContainer>
+  );
+};
+
 const HeaderContainer = styled.header`
   width: 375px;
   height: 64px;
@@ -36,7 +56,7 @@ const IconButton = styled.button`
   }
 `;
 
-const ConsultantButton = styled.button`
+const CounselorButton = styled.button`
   background-color: var(--gr100);
   border: 1px solid var(--gr80);
   color: var(--gr50);
@@ -50,25 +70,5 @@ const ConsultantButton = styled.button`
   line-height: 100%;
   align-items: center;
 `;
-
-const HomeHeader: React.FC = () => {
-  const navigate = useNavigate();
-
-  return (
-    <HeaderContainer>
-      {/* 로고 클릭 시 루트 경로로 이동 */}
-      <Logo src="/icons/logo.svg" alt="Logo" onClick={() => navigate('/')} />
-      <IconButton onClick={() => navigate('/notification')}>
-        <img src="/icons/notification.svg" alt="Notification" />
-      </IconButton>
-      <IconButton onClick={() => navigate('/mypage')}>
-        <img src="/icons/mypage.svg" alt="My Page" />
-      </IconButton>
-      <ConsultantButton onClick={() => alert('상담사로 전환됩니다.')}>
-        상담사 전환
-      </ConsultantButton>
-    </HeaderContainer>
-  );
-};
 
 export default HomeHeader;
