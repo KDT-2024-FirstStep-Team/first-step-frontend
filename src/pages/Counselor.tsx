@@ -1,6 +1,6 @@
 import Header from '@/components/Header';
 
-const Consultant = () => {
+const Counselor = () => {
   return (
     <div>
       <Header title="상담" showDropdownIcon={true} />
@@ -11,4 +11,4 @@ const Consultant = () => {
   );
 };
 
-export default Consultant;
+export default Counselor;

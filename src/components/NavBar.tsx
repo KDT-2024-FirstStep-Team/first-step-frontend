@@ -41,26 +41,26 @@ const navItems: NavItem[] = [
     name: '홈',
     path: '/',
     activeIcon: '/icons/home-active.svg',
-    inactiveIcon: '/icons/home-inactive.svg',
+    inactiveIcon: '/icons/home-inactive.svg'
   },
   {
     name: '상담',
-    path: '/consultant',
-    activeIcon: '/icons/consultant-active.svg',
-    inactiveIcon: '/icons/consultant-inactive.svg',
+    path: '/counselor',
+    activeIcon: '/icons/counselor-active.svg',
+    inactiveIcon: '/icons/counselor-inactive.svg'
   },
   {
     name: '쀼',
     path: '/question',
     activeIcon: '/icons/bbu-active.svg',
-    inactiveIcon: '/icons/bbu-inactive.svg',
+    inactiveIcon: '/icons/bbu-inactive.svg'
   },
   {
     name: '커뮤니티',
     path: '/community',
     activeIcon: '/icons/community-active.svg',
-    inactiveIcon: '/icons/community-inactive.svg',
-  },
+    inactiveIcon: '/icons/community-inactive.svg'
+  }
 ];
 
 const NavContainer = styled.div`
