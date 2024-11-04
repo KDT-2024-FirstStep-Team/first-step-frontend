@@ -35,7 +35,7 @@
   position: relative;
   margin: 0 auto;
   height: 100dvh;
-  max-width: 600px;
+  max-width: 450px;
   font-weight: 400;
   color: var(--gr10);
 }

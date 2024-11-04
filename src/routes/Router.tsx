@@ -13,6 +13,8 @@ import Password from '@/pages/Password.tsx';
 import Counselor from '@/pages/Counselor.tsx';
 import CounselorChatBot from '@/pages/CounselorChatBot.tsx';
 import UserGuide from '@/pages/UserGuide.tsx';
+import Buy from '@/pages/Buy.tsx';
+import MyHeart from '@/pages/MyHeart.tsx';
 
 function Router() {
   return (
@@ -31,6 +33,8 @@ function Router() {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/password" element={<Password />} />
       <Route path="/user-guide" element={<UserGuide />} />
+      <Route path="/buy" element={<Buy />} />
+      <Route path="/my-heart" element={<MyHeart />} />
       {/* 추가 라우트 */}
     </Routes>
   );

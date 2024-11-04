@@ -1,4 +1,12 @@
+import BackHeader from '@/components/BackHeader';
+import { Link } from 'react-router-dom';
+
 const Mypage = () => {
-  return <h1 className="text-2xl font-bold">마이페이지</h1>;
+  return (
+    <>
+      <BackHeader title="마이페이지" />
+      <Link to={'/my-heart'}>보유 하트</Link>
+    </>
+  );
 };
 export default Mypage;
