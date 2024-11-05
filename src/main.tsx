@@ -14,6 +14,9 @@ const Root = () => {
     '/consultant-chatbot',
     '/login',
     '/signup',
+    '/notification',
+    '/mypage',
+    '/password',
     '/buy',
     '/myheart',
     '/mypage'

@@ -3,6 +3,7 @@ import BestContentBanner from '@/components/BestContentBanner';
 import CardBanner from '@/components/CardBanner';
 import HomeHeader from '@/components/HomeHeader';
 
+
 const Home = () => {
   return (
     <div>
@@ -16,5 +17,15 @@ const Home = () => {
     </div>
   );
 };
+
+const Container = styled.div`
+  width: 100%;
+`;
+
+const Content = styled.div`
+  margin-top: 64px;
+  height: calc(100vh - 64px - 86px);
+  overflow-y: auto;
+`;
 
 export default Home;
