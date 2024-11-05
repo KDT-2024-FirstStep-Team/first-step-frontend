@@ -1,9 +1,11 @@
+// Login.tsx
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import TextInput from '@/components/TextInput';
 import CloseHeader from '@/components/CloseHeader';
 import Button from '@/components/Button';
+import Modal from '@/components/Modal';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -48,17 +50,11 @@ const Login = () => {
           <Button text="로그인" onClick={onLogin} />
         </ButtonContainer>
         {showModal && (
-          <ModalOverlay>
-            <ModalContent>
-              <ModalTitle>로그인 실패</ModalTitle>
-              <ModalMessage>
-                아이디 또는 비밀번호가 잘못되었습니다.
-              </ModalMessage>
-              <ModalButton onClick={() => setShowModal(false)}>
-                확인
-              </ModalButton>
-            </ModalContent>
-          </ModalOverlay>
+          <Modal
+            title="로그인 실패"
+            message="아이디 또는 비밀번호가 잘못되었습니다."
+            onClose={() => setShowModal(false)}
+          />
         )}
       </PageContainer>
     </Wrapper>
@@ -106,48 +102,6 @@ const ButtonContainer = styled.div`
   padding: 0 20px;
   display: flex;
   justify-content: center;
-`;
-
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-`;
-
-const ModalContent = styled.div`
-  width: 300px;
-  padding: 20px;
-  background: var(--gr100);
-  border-radius: 8px;
-  text-align: center;
-`;
-
-const ModalTitle = styled.h2`
-  font-size: 18px;
-  margin-bottom: 10px;
-`;
-
-const ModalMessage = styled.p`
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
-`;
-
-const ModalButton = styled.button`
-  padding: 10px 20px;
-  font-size: 14px;
-  color: var(--gr100);
-  background-color: var(--pr10);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 `;
 
 export default Login;
