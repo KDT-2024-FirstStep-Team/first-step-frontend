@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 interface TextInputProps {
@@ -7,22 +7,24 @@ interface TextInputProps {
   checkAvailability?: (value: string) => Promise<boolean>; // 중복 확인 함수 (선택)
   saveToBackend?: (value: string) => Promise<void>; // 백엔드 저장 함수 (선택)
   type?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 }
 
-const TextInput: React.FC<TextInputProps> = ({
+const TextInput = ({
   label,
   placeholder,
   checkAvailability,
   saveToBackend,
   type = 'text',
   onChange,
-}) => {
+  disabled = false,
+}: TextInputProps) => {
   const [value, setValue] = useState('');
   const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
   const [message, setMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setIsAvailable(null);
     setMessage('');
@@ -31,14 +33,12 @@ const TextInput: React.FC<TextInputProps> = ({
 
   const handleCheckAndSave = async () => {
     if (value && checkAvailability) {
-      // 중복 검사 함수가 제공된 경우
       try {
         const available = await checkAvailability(value);
         setIsAvailable(available);
         setMessage(available ? '사용 가능합니다' : '이미 사용 중입니다');
 
         if (available && saveToBackend) {
-          // 중복 검사 통과 시 저장 함수 실행
           await saveToBackend(value);
         }
       } catch (error) {
@@ -48,47 +48,63 @@ const TextInput: React.FC<TextInputProps> = ({
   };
 
   return (
-    <Container>
-      <Label>{label}</Label>
-      <InputContainer $isAvailable={isAvailable}>
-        <StyledInput
-          type={type}
-          placeholder={placeholder}
-          value={value}
-          onChange={handleChange}
-          onBlur={checkAvailability ? handleCheckAndSave : undefined} // 중복 검사 (선택)
-        />
-      </InputContainer>
-      {message && <Message $isAvailable={isAvailable}>{message}</Message>}
-    </Container>
+    <Wrapper>
+      <Container>
+        <Label>{label}</Label>
+        <InputContainer $isAvailable={isAvailable} $disabled={disabled}>
+          <StyledInput
+            type={type}
+            placeholder={placeholder}
+            value={value}
+            onChange={handleChange}
+            onBlur={checkAvailability ? handleCheckAndSave : undefined}
+            disabled={disabled}
+          />
+        </InputContainer>
+        {message && <Message $isAvailable={isAvailable}>{message}</Message>}
+      </Container>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 425px;
+`;
+
 const Container = styled.div`
-  width: 335px;
-  margin: auto;
+  width: 100%;
 `;
 
 const Label = styled.label`
   font-size: 14px;
   color: var(--gr50);
   font-weight: 500;
-  line-height: 100%;
+  line-height: 14px;
   margin-left: 2px;
 `;
 
-const InputContainer = styled.div<{ $isAvailable: boolean | null }>`
+const InputContainer = styled.div<{
+  $isAvailable: boolean | null;
+  $disabled: boolean;
+}>`
   display: flex;
   align-items: center;
   padding: 0 20px;
-  background-color: var(--gr100);
+  background-color: ${({ $disabled }) =>
+    $disabled ? 'var(--gr90)' : 'var(--gr100)'};
   border: 0.75px solid
-    ${(props) =>
-      props.$isAvailable === null
-        ? 'var(--gr60)'
-        : props.$isAvailable
-          ? '#2CAD5A'
-          : '#AB291A'};
+    ${({ $isAvailable, $disabled }) =>
+      $disabled
+        ? 'var(--gr70)'
+        : $isAvailable === null
+          ? 'var(--gr60)'
+          : $isAvailable
+            ? '#2CAD5A'
+            : '#AB291A'};
   border-radius: 8px;
   margin-top: 2px;
   height: 56px;
@@ -106,6 +122,10 @@ const StyledInput = styled.input`
   background-color: transparent;
 
   &::placeholder {
+    color: var(--gr60);
+  }
+
+  &:disabled {
     color: var(--gr60);
   }
 `;

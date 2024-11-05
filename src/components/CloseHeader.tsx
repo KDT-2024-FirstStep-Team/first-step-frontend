@@ -8,22 +8,37 @@ interface CloseHeaderProps {
   title: string;
 }
 
-const CloseHeader: React.FC<CloseHeaderProps> = ({ title }) => {
+const CloseHeader = ({ title }: CloseHeaderProps) => {
   const navigate = useNavigate();
 
   return (
-    <HeaderContainer>
-      <Title>{title}</Title>
-      <CloseButton onClick={() => navigate(-1)}>
-        <img src={xIcon} alt="닫기" />
-      </CloseButton>
-    </HeaderContainer>
+    <Wrapper>
+      <HeaderContainer>
+        <Title>{title}</Title>
+        <CloseButton onClick={() => navigate(-1)}>
+          <img src={xIcon} alt="닫기" />
+        </CloseButton>
+      </HeaderContainer>
+    </Wrapper>
   );
 };
 
-const HeaderContainer = styled.header`
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
-  max-width: 375px;
+`;
+
+const HeaderContainer = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1000;
+
+  width: 100%;
+  max-width: 425px;
   height: 64px;
   display: flex;
   align-items: center;

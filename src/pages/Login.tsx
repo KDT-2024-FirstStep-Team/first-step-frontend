@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import TextInput from '@/components/TextInput';
 import CloseHeader from '@/components/CloseHeader';
-import CustomButton from '@/components/Button';
+import Button from '@/components/Button';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,51 +26,62 @@ const Login = () => {
   };
 
   return (
-    <PageContainer>
-      <CloseHeader title="로그인" />
-      <ContentContainer>
-        <InputContainer>
-          <TextInput
-            label="이메일 주소"
-            placeholder="이메일 입력"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextInput
-            label="비밀번호"
-            placeholder="영문+숫자 8자 이상"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </InputContainer>
+    <Wrapper>
+      <PageContainer>
+        <CloseHeader title="로그인" />
+        <ContentContainer>
+          <InputContainer>
+            <TextInput
+              label="이메일 주소"
+              placeholder="이메일 입력"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextInput
+              label="비밀번호"
+              placeholder="영문+숫자 8자 이상"
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </InputContainer>
+        </ContentContainer>
         <ButtonContainer>
-          <CustomButton
-            text="로그인"
-            backgroundColor="var(--pr10)"
-            textColor="var(--gr100)"
-            onClick={onLogin}
-          />
+          <StyledButton text="로그인" onClick={onLogin} />
         </ButtonContainer>
-      </ContentContainer>
-      {showModal && (
-        <ModalOverlay>
-          <ModalContent>
-            <ModalTitle>로그인 실패</ModalTitle>
-            <ModalMessage>아이디 또는 비밀번호가 잘못되었습니다.</ModalMessage>
-            <ModalButton onClick={() => setShowModal(false)}>확인</ModalButton>
-          </ModalContent>
-        </ModalOverlay>
-      )}
-    </PageContainer>
+        {showModal && (
+          <ModalOverlay>
+            <ModalContent>
+              <ModalTitle>로그인 실패</ModalTitle>
+              <ModalMessage>
+                아이디 또는 비밀번호가 잘못되었습니다.
+              </ModalMessage>
+              <ModalButton onClick={() => setShowModal(false)}>
+                확인
+              </ModalButton>
+            </ModalContent>
+          </ModalOverlay>
+        )}
+      </PageContainer>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+`;
 
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  max-width: 425px;
   min-height: 100vh;
   background-color: var(--gr100);
+  position: relative;
+  padding-bottom: 34px;
 `;
 
 const ContentContainer = styled.div`
@@ -78,23 +89,38 @@ const ContentContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 375px;
-  min-height: 748px;
-  padding: 0 20px;
+  padding: 20px 20px 0 20px;
+  flex: 1;
 `;
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding-top: 20px;
 `;
 
 const ButtonContainer = styled.div`
+  width: 100%;
+  position: fixed;
+  bottom: 34px;
+  padding: 0 20px;
   display: flex;
   justify-content: center;
+`;
+
+const StyledButton = styled(Button)`
   width: 100%;
-  margin-bottom: 34px;
+  max-width: 335px;
+  height: 56px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: ${(props) =>
+    props.disabled ? 'var(--gr80)' : 'var(--pr10)'};
+  color: ${(props) => (props.disabled ? 'var(--gr50)' : 'var(--gr100)')};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ModalOverlay = styled.div`
@@ -132,7 +158,7 @@ const ModalMessage = styled.p`
 const ModalButton = styled.button`
   padding: 10px 20px;
   font-size: 14px;
-  color: #fff;
+  color: var(--gr100);
   background-color: var(--pr10);
   border: none;
   border-radius: 4px;

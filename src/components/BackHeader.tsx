@@ -8,26 +8,38 @@ interface BackHeaderProps {
   title: string;
 }
 
-const BackHeader: React.FC<BackHeaderProps> = ({ title }) => {
+const BackHeader = ({ title }: BackHeaderProps) => {
   const navigate = useNavigate();
 
   return (
-    <HeaderContainer>
-      <BackButton onClick={() => navigate(-1)}>
-        <img src={backIcon} alt="뒤로가기" />
-      </BackButton>
-      <Title>{title}</Title>
-    </HeaderContainer>
+    <Wrapper>
+      <HeaderContainer>
+        <BackButton onClick={() => navigate(-1)}>
+          <img src={backIcon} alt="뒤로가기" />
+        </BackButton>
+        <Title>{title}</Title>
+      </HeaderContainer>
+    </Wrapper>
   );
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`;
+
 const HeaderContainer = styled.header`
-  width: 375px;
+  width: 100%;
+  max-width: 425px;
   height: 64px;
   display: flex;
   align-items: center;
-  padding: 0 18px;
   background-color: var(--gr100);
+  padding: 0 18px;
+  position: fixed; /* 상단에 고정 */
+  top: 0;
+  z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
 `;
 
 const BackButton = styled.button`

@@ -13,12 +13,12 @@ interface HeaderProps {
   showNotificationIcon?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   title,
   showDropdownIcon = true,
   showSearchIcon = true,
   showNotificationIcon = true,
-}) => {
+}: HeaderProps) => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -57,7 +57,6 @@ const Header: React.FC<HeaderProps> = ({
           <DropdownItem onClick={() => navigate('/analysis')}>
             성향분석
           </DropdownItem>
-          {/* 추가 옵션 필요 시 여기에 추가 */}
         </DropdownMenu>
       )}
     </HeaderContainer>
@@ -65,14 +64,20 @@ const Header: React.FC<HeaderProps> = ({
 };
 
 const HeaderContainer = styled.header`
-  width: 375px;
+  width: 100%;
+  max-width: 425px;
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 26px 0 20px;
   background-color: var(--gr100);
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1000;
 `;
 
 const TitleContainer = styled.div`

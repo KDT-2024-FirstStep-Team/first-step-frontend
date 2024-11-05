@@ -8,6 +8,7 @@ interface ButtonProps {
   textColor?: string;
   path?: string;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,21 +18,30 @@ const Button: React.FC<ButtonProps> = ({
   textColor = 'var(--gr100)',
   path,
   onClick,
+  disabled = false,
 }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (path) {
-      navigate(path);
-    } else if (onClick) {
-      onClick();
+    if (!disabled) {
+      if (path) {
+        navigate(path);
+      } else if (onClick) {
+        onClick();
+      }
     }
   };
 
   return (
-    <ButtonContainer $backgroundColor={backgroundColor} onClick={handleClick}>
+    <ButtonContainer
+      $backgroundColor={disabled ? 'var(--pr30)' : backgroundColor}
+      onClick={handleClick}
+      disabled={disabled}
+    >
       {icon && <IconWrapper>{icon}</IconWrapper>}
-      <ButtonText $textColor={textColor}>{text}</ButtonText>
+      <ButtonText $textColor={disabled ? 'var(--gr100)' : textColor}>
+        {text}
+      </ButtonText>
     </ButtonContainer>
   );
 };
@@ -40,12 +50,12 @@ const ButtonContainer = styled.button<{ $backgroundColor: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 335px;
+  width: 100%;
   height: 56px;
   background-color: ${(props) => props.$backgroundColor};
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   position: relative;
   transition: background-color 0.3s;
 `;
