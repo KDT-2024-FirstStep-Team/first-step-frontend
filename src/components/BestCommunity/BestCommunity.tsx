@@ -32,8 +32,7 @@ const communityData: CommunityData[] = [
   {
     name: '행복한 신부',
     title: '파혼할까 고민입니다..',
-    content:
-      '안녕하세요. 이런 글을 올리게 될 줄은 몰랐는데, 요즘 정말 고민이 많아져서 여러분의 조언을 듣고 싶습니다. 저를 도와주시면 정말 감사하겠어요.',
+    content: '안녕하세요. 한 줄일 경우에요.',
     date: new Date('2024-11-04')
   },
   {
