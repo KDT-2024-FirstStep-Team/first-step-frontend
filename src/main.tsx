@@ -14,6 +14,9 @@ const Root = () => {
     '/consultant-chatbot',
     '/login',
     '/signup',
+    '/buy',
+    '/myheart',
+    '/mypage'
   ]; // 네비바 숨길 경로 추가
 
   return (

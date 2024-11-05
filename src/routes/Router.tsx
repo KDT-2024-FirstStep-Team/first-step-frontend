@@ -34,7 +34,7 @@ function Router() {
       <Route path="/password" element={<Password />} />
       <Route path="/user-guide" element={<UserGuide />} />
       <Route path="/buy" element={<Buy />} />
-      <Route path="/my-heart" element={<MyHeart />} />
+      <Route path="/myheart" element={<MyHeart />} />
       {/* 추가 라우트 */}
     </Routes>
   );
