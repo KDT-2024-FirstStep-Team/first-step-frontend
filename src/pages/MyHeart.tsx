@@ -1,11 +1,16 @@
 import BackHeader from '@/components/BackHeader';
-import { Link } from 'react-router-dom';
+import NotificationBanner from '@/components/NotificationBanner';
 
 const MyHeart = () => {
   return (
     <>
       <BackHeader title="내 하트" />
-      <Link to={'/buy'}>하트 충전하기</Link>
+      <NotificationBanner
+        src="/icons/notification-heart.svg"
+        alt="Heart"
+        text="하트 충전하고 추가 적립 혜택 받기"
+        path="/buy"
+      />
     </>
   );
 };
