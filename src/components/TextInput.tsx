@@ -106,7 +106,7 @@ const InputContainer = styled.div<{
             ? '#2CAD5A'
             : '#AB291A'};
   border-radius: 8px;
-  margin-top: 2px;
+  margin-top: 4px;
   height: 56px;
 `;
 

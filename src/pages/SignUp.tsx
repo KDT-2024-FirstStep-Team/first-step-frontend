@@ -153,7 +153,7 @@ const SignUp = () => {
           </FormGroup>
         </Content>
         <ButtonContainer>
-          <StyledButton
+          <Button
             text="가입하기"
             backgroundColor={isFormComplete ? 'var(--pr10)' : 'var(--gr80)'}
             textColor="white"
@@ -289,21 +289,6 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: var(--gr100);
-`;
-
-const StyledButton = styled(Button)`
-  width: 100%;
-  max-width: 335px;
-  height: 56px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 8px;
-  background-color: ${(props) =>
-    props.disabled ? 'var(--gr80)' : 'var(--pr10)'};
-  color: ${(props) => (props.disabled ? 'var(--gr50)' : 'var(--gr100)')};
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const CustomDateInput = styled.input.attrs({ type: 'date' })`
