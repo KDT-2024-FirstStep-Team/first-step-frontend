@@ -45,7 +45,7 @@ const Login = () => {
           </InputContainer>
         </ContentContainer>
         <ButtonContainer>
-          <StyledButton text="로그인" onClick={onLogin} />
+          <Button text="로그인" onClick={onLogin} />
         </ButtonContainer>
         {showModal && (
           <ModalOverlay>
@@ -105,21 +105,6 @@ const ButtonContainer = styled.div`
   bottom: 34px;
   padding: 0 20px;
   display: flex;
-  justify-content: center;
-`;
-
-const StyledButton = styled(Button)`
-  width: 100%;
-  max-width: 335px;
-  height: 56px;
-  font-size: 18px;
-  font-weight: 600;
-  border-radius: 8px;
-  background-color: ${(props) =>
-    props.disabled ? 'var(--gr80)' : 'var(--pr10)'};
-  color: ${(props) => (props.disabled ? 'var(--gr50)' : 'var(--gr100)')};
-  display: flex;
-  align-items: center;
   justify-content: center;
 `;
 
