@@ -5,8 +5,8 @@ const NavBar = () => {
   const location = useLocation();
 
   return (
-    <NavContainer>
-      <Nav className="app-container">
+    <NavContainer className="app-container">
+      <Nav>
         {navItems.map((item) => (
           <NavItem
             key={item.path}
