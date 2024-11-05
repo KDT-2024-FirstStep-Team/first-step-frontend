@@ -6,28 +6,20 @@ import styled from 'styled-components';
 
 const Home = () => {
   return (
-    <Container>
+    <Container className="content">
       <HomeHeader /> {/* HomeHeader 최상단 배치 */}
-      <Content>
-        <BestContentBanner />
-        <BestCommunity />
-        <CardBanner
-          userGuideSmallText="쀼의 세계가 처음이라면?"
-          userGuideBigText="실제 쀼가 알려주는 사용설명서"
-        />
-      </Content>
+      <BestContentBanner />
+      <BestCommunity />
+      <CardBanner
+        userGuideSmallText="쀼의 세계가 처음이라면?"
+        userGuideBigText="실제 쀼가 알려주는 사용설명서"
+      />
     </Container>
   );
 };
 
 const Container = styled.div`
   width: 100%;
-  overflow-y: auto;
-`;
-
-const Content = styled.div`
-  margin-top: 64px;
-  height: calc(100vh - 64px - 86px);
   overflow-y: auto;
 `;
 

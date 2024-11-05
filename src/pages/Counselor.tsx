@@ -4,7 +4,7 @@ const Counselor = () => {
   return (
     <>
       <Header title="상담" showDropdownIcon={true} />
-      <main></main>
+      <main className="content"></main>
     </>
   );
 };

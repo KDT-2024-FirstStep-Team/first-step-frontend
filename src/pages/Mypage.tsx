@@ -5,7 +5,9 @@ const Mypage = () => {
   return (
     <>
       <BackHeader title="마이페이지" />
-      <Link to={'/myheart'}>보유 하트</Link>
+      <main className="content">
+        <Link to={'/myheart'}>보유 하트</Link>
+      </main>
     </>
   );
 };

@@ -5,9 +5,11 @@ const Buy = () => {
   return (
     <>
       <BackHeader title="하트 구매" />
-      {heartPriceData.map(({ heart, amount }) => (
-        <BuyCard key={heart} heart={heart} amount={amount} />
-      ))}
+      <main className="content">
+        {heartPriceData.map(({ heart, amount }) => (
+          <BuyCard key={heart} heart={heart} amount={amount} />
+        ))}
+      </main>
     </>
   );
 };

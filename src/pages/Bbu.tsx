@@ -4,7 +4,7 @@ const Bbu = () => {
   return (
     <>
       <Header title="쀼" showDropdownIcon={false} />
-      <main></main>
+      <main className="content"></main>
     </>
   );
 };

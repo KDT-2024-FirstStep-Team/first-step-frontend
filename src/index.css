@@ -34,8 +34,11 @@
 .app-container {
   position: relative;
   margin: 0 auto;
-  height: 100dvh;
   max-width: 450px;
-  font-weight: 400;
-  color: var(--gr10);
+}
+
+.content {
+  margin-top: 64px;
+  height: calc(100vh - 64px - 86px);
+  overflow-y: auto;
 }
