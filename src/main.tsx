@@ -19,7 +19,8 @@ const Root = () => {
     '/password',
     '/buy',
     '/myheart',
-    '/mypage'
+    '/mypage',
+    '/counselor-chatbot',
   ]; // 네비바 숨길 경로 추가
 
   return (
