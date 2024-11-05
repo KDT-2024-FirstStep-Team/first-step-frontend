@@ -52,6 +52,7 @@ const Content = styled.p`
   font-weight: 400;
   letter-spacing: -0.2px;
   line-height: 19px;
+  height: 38px;
   color: var(--gr50);
   margin: 4px 0px;
   display: -webkit-box; /* Flexbox 기반 레이아웃을 사용 */
