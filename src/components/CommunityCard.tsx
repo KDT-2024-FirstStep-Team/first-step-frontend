@@ -101,7 +101,7 @@ const Title = styled.p`
 const Content = styled.p`
   font-size: 14px;
   font-weight: 400;
-  line-height: 19px;
+  line-height: 20px;
   color: var(--gr50);
   display: -webkit-box; /* Flexbox 기반 레이아웃을 사용 */
   -webkit-line-clamp: 3; /* 최대 3줄까지만 표시 */
