@@ -41,7 +41,7 @@ const LeftContainer = styled.div`
 const HeartContainer = styled.div`
   background-color: var(--pr40);
   border-radius: 4px;
-  width: 61px;
+  width: fit-content;
   height: 19px;
   padding: 4px 6px;
   display: flex;
