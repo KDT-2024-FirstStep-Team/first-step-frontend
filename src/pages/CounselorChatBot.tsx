@@ -1,6 +1,6 @@
 import BackHeader from '@/components/BackHeader';
 
-const ConsultantChatBot: React.FC = () => {
+const CounselorChatBot: React.FC = () => {
   return (
     <div>
       <BackHeader title="쀼 챗봇" />
@@ -10,4 +10,4 @@ const ConsultantChatBot: React.FC = () => {
   );
 };
 
-export default ConsultantChatBot;
+export default CounselorChatBot;

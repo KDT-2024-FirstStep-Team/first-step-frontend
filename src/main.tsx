@@ -17,6 +17,9 @@ const Root = () => {
     '/notification',
     '/mypage',
     '/password',
+    '/buy',
+    '/myheart',
+    '/mypage'
   ]; // 네비바 숨길 경로 추가
 
   return (
