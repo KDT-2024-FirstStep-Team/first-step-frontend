@@ -45,7 +45,6 @@ const CommunityCard = ({
 
 const CardContainer = styled.div`
   width: 100%;
-  height: 185px;
   background-color: var(--gr100);
   padding: 18px 21px 0 21px;
   display: flex;
@@ -72,6 +71,7 @@ const CardContainer = styled.div`
 
 const InfoContainer = styled.div`
   display: flex;
+  margin-top: 2px;
 
   span {
     color: var(--gr60);
@@ -85,6 +85,7 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 6px;
 `;
 
 const StatBoxContainer = styled.div`
@@ -100,8 +101,7 @@ const Title = styled.p`
 const Content = styled.p`
   font-size: 14px;
   font-weight: 400;
-  height: 57px;
-  line-height: 19px;
+  line-height: 20px;
   color: var(--gr50);
   display: -webkit-box; /* Flexbox 기반 레이아웃을 사용 */
   -webkit-line-clamp: 3; /* 최대 3줄까지만 표시 */
