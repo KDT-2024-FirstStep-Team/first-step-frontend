@@ -17,7 +17,7 @@ const Header = ({
   title,
   showDropdownIcon = true,
   showSearchIcon = true,
-  showNotificationIcon = true,
+  showNotificationIcon = true
 }: HeaderProps) => {
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -65,7 +65,7 @@ const Header = ({
 
 const HeaderContainer = styled.header`
   width: 100%;
-  max-width: 425px;
+  max-width: 450px;
   height: 64px;
   display: flex;
   align-items: center;
