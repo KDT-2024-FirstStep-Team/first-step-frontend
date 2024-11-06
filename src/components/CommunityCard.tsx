@@ -1,34 +1,54 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface CommunityCardProps {
+  postId: number;
   title: string;
   content: string;
   username: string;
   date: Date;
   likes: number;
   comments: number;
+  src?: string;
 }
 
 const CommunityCard = ({
+  postId,
   title,
   content,
   username,
   date,
   likes,
-  comments
+  comments,
+  src
 }: CommunityCardProps) => {
+  const navigate = useNavigate();
   const formattedDate = date.toISOString().split('T')[0].replace(/-/g, '.');
 
+  const handleCardClick = () => {
+    navigate('/community/detail', { state: { postId } });
+  };
+
   return (
-    <CardContainer>
-      <ContentWrapper>
-        <Title>{title}</Title>
-        <Content>{content}</Content>
-        <InfoContainer>
-          <Username>{username}</Username>
-          <Date>{formattedDate}</Date>
-        </InfoContainer>
-      </ContentWrapper>
+    <CardContainer onClick={handleCardClick}>
+      {/* 커뮤니티 내용 */}
+      <ImageContentWrapper>
+        <ContentWrapper>
+          <Title>{title}</Title>
+          <Content>{content}</Content>
+          <InfoContainer>
+            <Username>{username}</Username>
+            <Date>{formattedDate}</Date>
+          </InfoContainer>
+        </ContentWrapper>
+        {src && (
+          <Image>
+            <img src={src} alt="Image" />
+          </Image>
+        )}
+      </ImageContentWrapper>
+
+      {/* 좋아요와 댓글 */}
       <StatBoxContainer>
         <StatBox>
           <img src="/icons/likes.svg" alt="Likes" />
@@ -69,6 +89,34 @@ const CardContainer = styled.div`
   }
 `;
 
+const ImageContentWrapper = styled.div`
+  display: flex;
+  gap: 20px;
+`;
+
+const ContentWrapper = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+`;
+
+const Image = styled.div`
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+`;
+
 const InfoContainer = styled.div`
   display: flex;
   margin-top: 2px;
@@ -80,14 +128,6 @@ const InfoContainer = styled.div`
   }
 `;
 
-const ContentWrapper = styled.div`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 6px;
-`;
-
 const StatBoxContainer = styled.div`
   display: flex;
 `;
@@ -96,6 +136,12 @@ const Title = styled.p`
   color: var(--gr30);
   font-weight: 600;
   font-size: 18px;
+  display: -webkit-box; /* Flexbox 기반 레이아웃을 사용 */
+  -webkit-line-clamp: 1; /* 최대 1줄까지만 표시 */
+  -webkit-box-orient: vertical; /* 박스 방향을 세로로 설정 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis;
+  white-space: normal;
 `;
 
 const Content = styled.p`

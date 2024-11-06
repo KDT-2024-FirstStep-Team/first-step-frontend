@@ -30,7 +30,7 @@ const Wrapper = styled.div`
 
 const HeaderContainer = styled.header`
   width: 100%;
-  max-width: 425px;
+  max-width: 450px;
   height: 64px;
   display: flex;
   align-items: center;

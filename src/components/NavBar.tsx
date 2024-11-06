@@ -78,7 +78,7 @@ const NavContainer = styled.div`
 
 const Nav = styled.nav`
   width: 100%;
-  max-width: 375px;
+  max-width: 450px;
   height: 52px;
   display: flex;
   align-items: center;
