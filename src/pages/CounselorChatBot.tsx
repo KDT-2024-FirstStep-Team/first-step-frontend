@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BackHeader from '@/components/BackHeader';
 import Chat from '@/components/Chat';
 import OtherChat from '@/components/OtherChat';
+import ChatInput from '@/components/ChatInput';
 
 const CounselorChatBot: React.FC = () => {
-  const messages = [
+  const [messages, setMessages] = useState([
     {
       type: 'user',
       time: '오후 3:21',
@@ -27,12 +28,48 @@ const CounselorChatBot: React.FC = () => {
       name: 'AI 쀼',
       avatar: '/icons/profile.svg',
     },
-  ];
+  ]);
+
+  const handleSendMessage = (message: string) => {
+    const newMessage = {
+      type: 'user',
+      time: new Date().toLocaleTimeString('ko-KR', {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      message,
+      image: null,
+    };
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+    setTimeout(() => {
+      const botResponse = {
+        type: 'bot',
+        time: new Date().toLocaleTimeString('ko-KR', {
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+        message: '제가 도와드릴 수 있는 부분을 말씀해 주세요.',
+        image: null,
+        name: 'AI 쀼',
+        avatar: '/icons/profile.svg',
+      };
+      setMessages((prevMessages) => [...prevMessages, botResponse]);
+    }, 1000);
+  };
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <BackHeader title="쀼 챗봇" />
-      <main className="content" style={{ marginTop: '74px' }}>
+      <main
+        className="content"
+        style={{
+          marginTop: '74px',
+          flexGrow: 1,
+          overflowY: 'auto',
+          paddingTop: '10px',
+        }}
+      >
         {messages.map((msg, index) => {
           if (msg.type === 'user') {
             return (
@@ -58,7 +95,13 @@ const CounselorChatBot: React.FC = () => {
           return null;
         })}
       </main>
-    </>
+      <ChatInput
+        postId="1"
+        userId={1}
+        nickname="User"
+        onCommentSubmitted={() => {}}
+      />
+    </div>
   );
 };
 
