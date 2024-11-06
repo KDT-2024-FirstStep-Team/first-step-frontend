@@ -10,7 +10,7 @@ const Community = () => {
     <>
       <Header title="커뮤니티" showDropdownIcon={false} />
 
-      <main className="content pt-7">
+      <main className="content pt-10">
         <CommunityTab activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === 0 &&
           lifeData.map(

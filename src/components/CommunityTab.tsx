@@ -25,7 +25,7 @@ const TabContainer = styled.div`
   z-index: 1000;
   top: 64px;
   width: 100%;
-  height: 28px;
+  height: 40px;
   padding: 0 20px;
   border-bottom: 0.5px solid var(--gr80);
   display: flex;
@@ -42,6 +42,7 @@ const Tab = styled.div<TabProps>`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  padding-top: 10px;
 
   span {
     font-size: 16px;
