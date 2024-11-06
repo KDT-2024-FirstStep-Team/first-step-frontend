@@ -21,11 +21,15 @@ const CommunityTab = ({ activeTab, setActiveTab }: CommunityTabProps) => {
 };
 
 const TabContainer = styled.div`
+  position: fixed;
+  z-index: 1000;
+  top: 64px;
   width: 100%;
   height: 28px;
   padding: 0 20px;
   border-bottom: 0.5px solid var(--gr80);
   display: flex;
+  background-color: var(--gr100);
 `;
 
 interface TabProps {

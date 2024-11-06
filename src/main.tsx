@@ -20,12 +20,13 @@ const Root = () => {
     '/buy',
     '/myheart',
     '/mypage',
-    '/counselor-chatbot',
+    '/counselor-chatbot'
   ]; // 네비바 숨길 경로 추가
 
   return (
     <>
       {!hideNavPaths.includes(location.pathname) && <NavBar />}
+
       <App />
     </>
   );

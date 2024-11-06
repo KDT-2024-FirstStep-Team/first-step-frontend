@@ -15,6 +15,7 @@ import CounselorChatBot from '@/pages/CounselorChatBot.tsx';
 import UserGuide from '@/pages/UserGuide.tsx';
 import Buy from '@/pages/Buy.tsx';
 import MyHeart from '@/pages/MyHeart.tsx';
+import CommunityDetail from '@/pages/CommunityDetail.tsx';
 
 function Router() {
   return (
@@ -35,6 +36,7 @@ function Router() {
       <Route path="/user-guide" element={<UserGuide />} />
       <Route path="/buy" element={<Buy />} />
       <Route path="/myheart" element={<MyHeart />} />
+      <Route path="/community/detail" element={<CommunityDetail />} />
       {/* 추가 라우트 */}
     </Routes>
   );
