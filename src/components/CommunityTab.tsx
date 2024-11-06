@@ -42,7 +42,7 @@ const Tab = styled.div<TabProps>`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding-top: 10px;
+  padding-top: 8px;
 
   span {
     font-size: 16px;
