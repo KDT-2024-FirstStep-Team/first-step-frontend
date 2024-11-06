@@ -92,7 +92,7 @@ const styles = {
     borderRadius: '2px 20px 20px 20px',
     background: 'var(--gr90)',
     color: 'var(--gr100)',
-    padding: '8px 14px',
+    padding: '12px 14px',
     marginRight: '6px',
     maxWidth: '278px',
     wordWrap: 'break-word',
