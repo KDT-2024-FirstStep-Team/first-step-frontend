@@ -1,16 +1,64 @@
 import CommunityCard from '@/components/CommunityCard';
 import CommunityTab from '@/components/CommunityTab';
 import Header from '@/components/Header';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const Community = () => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState<number>(() => {
+    const savedTab = window.sessionStorage.getItem('activeTab');
+    return savedTab ? parseInt(savedTab) : 0;
+  });
+
+  const mainRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    // window 전역 객체 사용이 안되어서 React 엘리먼트에 이벤트를 걸기 위한 Ref 사용
+    const mainElement = mainRef.current;
+
+    // 스크롤 위치 복원, 세션스토리지에 저장한 스크롤 위치를 꺼내서 렌더링 시 해당 위치로 이동 시키는 기능
+    const restoreScrollPosition = () => {
+      if (mainElement) {
+        const savedScrollTop = window.sessionStorage.getItem('scrollTop');
+        if (savedScrollTop) {
+          mainElement.scrollTo(0, parseInt(savedScrollTop));
+        }
+      }
+    };
+
+    // 컴포넌트 마운트 시 스크롤 위치 복원
+    restoreScrollPosition();
+
+    // 스크롤이 발생하면 현재 스크롤 위치를 세션 스토리지에 저장하는 함수
+    const handleScroll = (event: Event) => {
+      const target = event.target as HTMLElement;
+      const scrollTop = target.scrollTop;
+      window.sessionStorage.setItem('scrollTop', scrollTop.toString());
+    };
+
+    // html 요소가 렌더링이 되면 해당 요소에 스크롤 이벤트를 추가, 스크롤이 발생하는 것을 감지
+    if (mainElement) {
+      mainElement.addEventListener('scroll', handleScroll);
+    }
+
+    // 렌더링이 될 때마다 이벤트가 등록되므로 컴포넌트가 언마운트 되면 스크롤 이벤트를 제거하는 CleanUp 부분
+    return () => {
+      if (mainElement) {
+        mainElement.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
+  // activeTab이 변경될 때마다 sessionStorage에 저장
+  useEffect(() => {
+    window.sessionStorage.setItem('activeTab', activeTab.toString());
+  }, [activeTab]);
 
   return (
     <>
       <Header title="커뮤니티" showDropdownIcon={false} />
 
-      <main className="content pt-10">
+      {/* scroll 위치 계산을 위해 main  태그에 mainRef 걸어주기 */}
+      <main className="content pt-10" ref={mainRef}>
         <CommunityTab activeTab={activeTab} setActiveTab={setActiveTab} />
         {activeTab === 0 &&
           lifeData.map(
@@ -39,12 +87,18 @@ const Community = () => {
           )}
         {activeTab === 1 &&
           tipData.map(
-            (
-              { postId, title, content, username, date, likes, comments, src },
-              index
-            ) => (
+            ({
+              postId,
+              title,
+              content,
+              username,
+              date,
+              likes,
+              comments,
+              src
+            }) => (
               <CommunityCard
-                key={index}
+                key={postId}
                 postId={postId}
                 title={title}
                 content={content}
