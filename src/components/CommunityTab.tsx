@@ -25,6 +25,7 @@ const TabContainer = styled.div`
   z-index: 1000;
   top: 64px;
   width: 100%;
+  max-width: 450px;
   height: 40px;
   padding: 0 20px;
   border-bottom: 0.5px solid var(--gr80);
