@@ -96,8 +96,9 @@ const NavItem = styled(Link)<{ $active: boolean }>`
   align-items: center;
   justify-content: center;
   text-align: center;
+  text-decoration: none;
 
-  img {
+  Image {
     margin-bottom: 2px;
     filter: ${(props) => (props.$active ? 'none' : 'grayscale(100%)')};
   }

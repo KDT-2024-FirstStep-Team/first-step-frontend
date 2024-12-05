@@ -1,7 +1,7 @@
 'use client';
 
 import styled from 'styled-components';
-// import HomeHeader from '../components/HomeHeader';
+import HomeHeader from './components/HomeHeader';
 // import BestContentBanner from '../components/BestContentBanner';
 // import BestCommunity from '../components/BestCommunity/BestCommunity';
 // import CardBanner from '../components/CardBanner';
@@ -9,7 +9,7 @@ import styled from 'styled-components';
 export default function Home() {
   return (
     <Container className="content">
-      {/* <HomeHeader /> */}
+      <HomeHeader />
       {/* <BestContentBanner /> */}
       {/* <BestCommunity /> */}
       {/* <CardBanner

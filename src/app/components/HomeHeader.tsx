@@ -1,20 +1,36 @@
+'use client';
+
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
+import Image from 'next/image';
 
 const HomeHeader = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <Wrapper>
       <HeaderContainer>
         {/* 로고 클릭 시 루트 경로로 이동 */}
-        <Logo src="/icons/logo.svg" alt="Logo" onClick={() => navigate('/')} />
-        <IconButton onClick={() => navigate('/notification')}>
-          <img src="/icons/notification.svg" alt="Notification" />
+        <Logo
+          src="/icons/logo.svg"
+          alt="Logo"
+          width={0}
+          height={0}
+          onClick={() => router.push('/')}
+          style={{ width: 'auto', height: 'auto' }}
+          priority
+        />
+        <IconButton onClick={() => router.push('/notification')}>
+          <Image
+            src="/icons/notification.svg"
+            alt="Notification"
+            width={24}
+            height={24}
+          />
         </IconButton>
-        <IconButton onClick={() => navigate('/mypage')}>
-          <img src="/icons/mypage.svg" alt="My Page" />
+        <IconButton onClick={() => router.push('/mypage')}>
+          <Image src="/icons/mypage.svg" alt="My Page" width={24} height={24} />
         </IconButton>
         <ConsultantButton onClick={() => alert('상담사로 전환됩니다.')}>
           상담사 전환
@@ -49,9 +65,7 @@ const HeaderContainer = styled.header`
   background-color: var(--gr100);
 `;
 
-const Logo = styled.img`
-  width: auto;
-  height: auto;
+const Logo = styled(Image)`
   flex-shrink: 0;
   cursor: pointer;
 `;
@@ -63,11 +77,6 @@ const IconButton = styled.button`
   display: flex;
   align-items: center;
   margin-left: 20px;
-
-  img {
-    width: 24px;
-    height: 24px;
-  }
 
   &:first-of-type {
     margin-left: auto;
