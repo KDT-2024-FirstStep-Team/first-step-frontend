@@ -16,6 +16,7 @@ import UserGuide from '@/pages/UserGuide.tsx';
 import Buy from '@/pages/Buy.tsx';
 import MyHeart from '@/pages/MyHeart.tsx';
 import CommunityDetail from '@/pages/CommunityDetail.tsx';
+import AnalysisDetail from '@/pages/AnalysisDetail.tsx';
 
 function Router() {
   return (
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/counselor-chatbot" element={<CounselorChatBot />} />
       <Route path="/search" element={<Search />} />
       <Route path="/analysis" element={<Analysis />} />
+      <Route path="/analysis-detail" element={<AnalysisDetail />} />
       <Route path="/select-login" element={<SelectLogin />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />

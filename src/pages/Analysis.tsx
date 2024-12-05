@@ -1,5 +1,5 @@
-import React from 'react';
 import Header from '@/components/Header';
+import { Link } from 'react-router-dom';
 
 const Analysis = () => {
   return (
@@ -9,8 +9,8 @@ const Analysis = () => {
         showSearchIcon={true}
         showNotificationIcon={true}
       />
-      <main>
-        <h1 className="text-2xl font-bold">성향분석</h1>
+      <main className="content">
+        <Link to={'/analysis-detail'}>성향분석 결과 페이지</Link>
       </main>
     </div>
   );
