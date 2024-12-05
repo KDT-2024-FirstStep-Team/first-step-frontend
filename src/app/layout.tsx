@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import NavBar from './components/NavBar';
 
 export const metadata: Metadata = {
   title: 'Vite App',
@@ -13,7 +14,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div id="root">{children}</div>
+        <NavBar />
+        {children}
       </body>
     </html>
   );
