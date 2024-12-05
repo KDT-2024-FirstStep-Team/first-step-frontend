@@ -51,9 +51,6 @@ const Wrapper = styled.div`
 const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
   z-index: 1000;
 
   width: 100%;
@@ -63,6 +60,7 @@ const HeaderContainer = styled.header`
   align-items: center;
   padding: 0 22px;
   background-color: var(--gr100);
+  box-sizing: border-box;
 `;
 
 const Logo = styled(Image)`
