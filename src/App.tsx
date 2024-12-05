@@ -1,32 +1,38 @@
-import { useLocation } from 'react-router-dom';
-import Router from './routes/Router';
-import NavBar from './components/NavBar';
+import cardBanner from '../public/card-banner-bg.png';
 
-const App = () => {
-  const location = useLocation();
-  const hideNavPaths = [
-    '/select-login',
-    '/consultant-chatbot',
-    '/login',
-    '/signup',
-    '/notification',
-    '/mypage',
-    '/password',
-    '/buy',
-    '/myheart',
-    '/mypage',
-    '/counselor-chatbot'
-  ]; // 네비바 숨길 경로 추가
+export default function App() {
+  return <img src={cardBanner.src} />;
+}
 
-  return (
-    <>
-      {!hideNavPaths.includes(location.pathname) && <NavBar />}
+// import { useLocation } from 'react-router-dom';
+// import Router from './routes/Router';
+// import NavBar from './components/NavBar';
 
-      <div className="app-container">
-        <Router></Router>
-      </div>
-    </>
-  );
-};
+// const App = () => {
+//   const location = useLocation();
+//   const hideNavPaths = [
+//     '/select-login',
+//     '/consultant-chatbot',
+//     '/login',
+//     '/signup',
+//     '/notification',
+//     '/mypage',
+//     '/password',
+//     '/buy',
+//     '/myheart',
+//     '/mypage',
+//     '/counselor-chatbot'
+//   ]; // 네비바 숨길 경로 추가
 
-export default App;
+//   return (
+//     <>
+//       {!hideNavPaths.includes(location.pathname) && <NavBar />}
+
+//       <div className="app-container">
+//         <Router></Router>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default App;
