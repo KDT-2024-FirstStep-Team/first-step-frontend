@@ -1,20 +1,21 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+'use client';
 
-import backIcon from '/icons/back.svg';
+import { useRouter } from 'next/navigation';
+import styled from 'styled-components';
+import Image from 'next/image';
 
 interface BackHeaderProps {
   title: string;
 }
 
 const BackHeader = ({ title }: BackHeaderProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <Wrapper>
       <HeaderContainer>
-        <BackButton onClick={() => navigate(-1)}>
-          <img src={backIcon} alt="뒤로가기" />
+        <BackButton onClick={() => router.back()}>
+          <Image src="/icons/back.svg" alt="뒤로가기" width={24} height={24} />
         </BackButton>
         <Title>{title}</Title>
       </HeaderContainer>
@@ -49,11 +50,6 @@ const BackButton = styled.button`
   align-items: center;
   padding: 0;
   margin-right: 6px;
-
-  img {
-    width: 24px;
-    height: 24px;
-  }
 `;
 
 const Title = styled.h1`

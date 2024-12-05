@@ -1,8 +1,12 @@
+'use client';
+
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const NavBar = () => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   return (
     <NavContainer className="app-container">
@@ -10,16 +14,14 @@ const NavBar = () => {
         {navItems.map((item) => (
           <NavItem
             key={item.path}
-            to={item.path}
-            $active={location.pathname === item.path}
+            href={item.path}
+            $active={pathname === item.path}
           >
-            <img
-              src={
-                location.pathname === item.path
-                  ? item.activeIcon
-                  : item.inactiveIcon
-              }
+            <Image
+              src={pathname === item.path ? item.activeIcon : item.inactiveIcon}
               alt={item.name}
+              width={30}
+              height={30}
             />
             <span>{item.name}</span>
           </NavItem>
@@ -41,26 +43,26 @@ const navItems: NavItem[] = [
     name: '홈',
     path: '/',
     activeIcon: '/icons/home-active.svg',
-    inactiveIcon: '/icons/home-inactive.svg'
+    inactiveIcon: '/icons/home-inactive.svg',
   },
   {
     name: '상담',
     path: '/counselor',
     activeIcon: '/icons/counselor-active.svg',
-    inactiveIcon: '/icons/counselor-inactive.svg'
+    inactiveIcon: '/icons/counselor-inactive.svg',
   },
   {
     name: '쀼',
     path: '/question',
     activeIcon: '/icons/bbu-active.svg',
-    inactiveIcon: '/icons/bbu-inactive.svg'
+    inactiveIcon: '/icons/bbu-inactive.svg',
   },
   {
     name: '커뮤니티',
     path: '/community',
     activeIcon: '/icons/community-active.svg',
-    inactiveIcon: '/icons/community-inactive.svg'
-  }
+    inactiveIcon: '/icons/community-inactive.svg',
+  },
 ];
 
 const NavContainer = styled.div`
@@ -94,10 +96,9 @@ const NavItem = styled(Link)<{ $active: boolean }>`
   align-items: center;
   justify-content: center;
   text-align: center;
+  text-decoration: none;
 
-  img {
-    width: 30px;
-    height: 30px;
+  Image {
     margin-bottom: 2px;
     filter: ${(props) => (props.$active ? 'none' : 'grayscale(100%)')};
   }
