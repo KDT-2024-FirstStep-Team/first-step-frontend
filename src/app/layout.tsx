@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import NavBar from './components/NavBar';
 import StyledComponentsRegistry from './lib/registry';
-import GlobalStyles from '../styles/GlobalStyles';
+import GlobalStyles from './styles/GlobalStyles';
 
 export const metadata: Metadata = {
   title: 'Vite App',
