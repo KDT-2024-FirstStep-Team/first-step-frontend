@@ -1,6 +1,3 @@
-'use client';
-
-import styled from 'styled-components';
 import HomeHeader from './components/HomeHeader';
 // import BestContentBanner from '../components/BestContentBanner';
 // import BestCommunity from '../components/BestCommunity/BestCommunity';
@@ -8,7 +5,7 @@ import HomeHeader from './components/HomeHeader';
 
 export default function Home() {
   return (
-    <Container className="content">
+    <div className="content">
       <HomeHeader />
       {/* <BestContentBanner /> */}
       {/* <BestCommunity /> */}
@@ -17,11 +14,6 @@ export default function Home() {
         userGuideBigText="실제 쀼가 알려주는 사용설명서"
       /> */}
       <div>홈입니다</div>
-    </Container>
+    </div>
   );
 }
-
-const Container = styled.div`
-  width: 100%;
-  overflow-y: auto;
-`;
