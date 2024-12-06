@@ -8,7 +8,6 @@ export default function MyPage() {
       <main className="content">
         <Link href={'/myheart'}>보유 하트</Link>
       </main>
-      <h1>쀼</h1>
     </>
   );
 }
