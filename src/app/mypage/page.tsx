@@ -1,12 +1,12 @@
-import Link from 'next/link';
 import BackHeader from '../components/BackHeader';
+import CardBanner from '../components/CardBanner';
 
 export default function MyPage() {
   return (
     <>
       <BackHeader title="마이페이지" />
       <main className="content">
-        <Link href={'/myheart'}>보유 하트</Link>
+        <CardBanner location="mypage" numberOfBbu={20} />
       </main>
     </>
   );

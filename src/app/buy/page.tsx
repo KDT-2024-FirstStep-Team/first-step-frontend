@@ -1,7 +1,9 @@
-import BackHeader from '@/components/BackHeader';
-import BuyCard from '@/components/BuyCard';
+'use client';
 
-const Buy = () => {
+import BackHeader from '../components/BackHeader';
+import BuyCard from '../components/BuyCard';
+
+export default function MyHeart() {
   return (
     <>
       <BackHeader title="하트 구매" />
@@ -12,7 +14,7 @@ const Buy = () => {
       </main>
     </>
   );
-};
+}
 
 interface HeartPriceData {
   heart: number;
@@ -23,7 +25,5 @@ const heartPriceData: HeartPriceData[] = [
   { heart: 5, amount: 5000 },
   { heart: 15, amount: 15000 },
   { heart: 30, amount: 30000 },
-  { heart: 50, amount: 50000 }
+  { heart: 50, amount: 50000 },
 ];
-
-export default Buy;

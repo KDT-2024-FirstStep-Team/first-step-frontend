@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 
 interface HeartTabProps {
@@ -27,7 +29,7 @@ const HeartTab = ({ activeTab, setActiveTab }: HeartTabProps) => {
 const TabContainer = styled.div`
   position: fixed;
   z-index: 1000;
-  top: 110px;
+  top: 220px;
   width: 100%;
   max-width: 450px;
   height: 50px;
@@ -35,6 +37,7 @@ const TabContainer = styled.div`
   border-bottom: 0.5px solid var(--gr80);
   display: flex;
   background-color: var(--gr100);
+  box-sizing: border-box;
 `;
 
 interface TabProps {

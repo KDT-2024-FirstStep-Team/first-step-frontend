@@ -1,12 +1,15 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import styled from 'styled-components';
+
+import { useState, useEffect } from 'react';
 import {
   Carousel,
+  CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselApi,
 } from './ui/carousel';
-import { useState, useEffect } from 'react';
 
 const BestContentBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,14 +32,16 @@ const BestContentBanner = () => {
   return (
     <div className="relative">
       <Carousel setApi={setApi}>
-        <CarouselContent className="m-0">
+        <CarouselContent>
           {contentItems.map((item) => (
             <StyledCarouselItem
               $backgroundImage="/images/best-content-bg.png"
               key={item.title}
             >
-              <p>{item.title}</p>
-              <StyledLink to={item.path}>지금 컨텐츠 보러가기 &gt;</StyledLink>
+              <p className="text-sm">{item.title}</p>
+              <StyledLink href={item.path}>
+                지금 컨텐츠 보러가기 &gt;
+              </StyledLink>
             </StyledCarouselItem>
           ))}
         </CarouselContent>

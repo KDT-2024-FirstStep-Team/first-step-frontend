@@ -26,6 +26,11 @@ const GlobalStyles = createGlobalStyle`
     font-family: 'Pretendard', sans-serif;
   }
 
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
   .app-container {
     position: relative;
     margin: 0 auto;
@@ -36,6 +41,7 @@ const GlobalStyles = createGlobalStyle`
     margin-top: 64px;
     height: calc(100vh - 64px - 86px);
     overflow-y: auto;
+    width: 100%;
   }
 `;
 

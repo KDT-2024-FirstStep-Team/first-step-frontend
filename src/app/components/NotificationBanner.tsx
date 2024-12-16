@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import styled from 'styled-components';
 
 interface NotificationBannerProps {
@@ -12,13 +14,13 @@ const NotificationBanner = ({
   src,
   alt,
   text,
-  path
+  path,
 }: NotificationBannerProps) => {
   return (
     <BannerContainer>
       <img src={src} alt={alt}></img>
       <Text>{text}</Text>
-      <StyledLink to={path}>
+      <StyledLink href={path}>
         <ChevronIcon src="/icons/chevron-right.svg" alt="Right"></ChevronIcon>
       </StyledLink>
     </BannerContainer>
@@ -36,6 +38,7 @@ const BannerContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  box-sizing: border-box;
 `;
 
 const Text = styled.p`

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import useEmblaCarousel, {
-  type UseEmblaCarouselType
+  type UseEmblaCarouselType,
 } from 'embla-carousel-react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+import { cn } from '../../lib/utils';
+import { Button } from './button';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -59,7 +59,7 @@ const Carousel = React.forwardRef<
     const [carouselRef, api] = useEmblaCarousel(
       {
         ...opts,
-        axis: orientation === 'horizontal' ? 'x' : 'y'
+        axis: orientation === 'horizontal' ? 'x' : 'y',
       },
       plugins
     );
@@ -129,7 +129,7 @@ const Carousel = React.forwardRef<
           scrollPrev,
           scrollNext,
           canScrollPrev,
-          canScrollNext
+          canScrollNext,
         }}
       >
         <div
@@ -160,7 +160,7 @@ const CarouselContent = React.forwardRef<
         ref={ref}
         className={cn(
           'flex',
-          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
+          orientation === 'horizontal' ? '' : ' flex-col',
           className
         )}
         {...props}
@@ -182,8 +182,8 @@ const CarouselItem = React.forwardRef<
       role="group"
       aria-roledescription="slide"
       className={cn(
-        'min-w-full shrink-0 grow-0',
-        orientation === 'horizontal' ? 'px-5 py-4' : 'pt-4',
+        'min-w-0 shrink-0 grow-0 basis-full',
+        orientation === 'horizontal' ? 'p-4' : 'p-4',
         className
       )}
       {...props}
@@ -256,5 +256,5 @@ export {
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
-  CarouselNext
+  CarouselNext,
 };
