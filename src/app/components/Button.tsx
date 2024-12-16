@@ -1,5 +1,7 @@
+'use client';
+
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 interface ButtonProps {
   text: string;
@@ -20,12 +22,12 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   disabled = false,
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClick = () => {
     if (!disabled) {
       if (path) {
-        navigate(path);
+        router.push(path); // Next.js 라우팅
       } else if (onClick) {
         onClick();
       }

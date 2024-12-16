@@ -2,9 +2,9 @@
 
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import styled from 'styled-components';
-import BackHeader from '@/components/BackHeader';
-import TextInput from '@/components/TextInput';
-import Button from '@/components/Button';
+import BackHeader from '../components/BackHeader';
+import TextInput from '../components/TextInput';
+import Button from '../components/Button';
 
 import Image from 'next/image';
 

@@ -1,21 +1,23 @@
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+'use client';
 
-import xIcon from '/icons/x.svg';
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import styled from 'styled-components';
+import Image from 'next/image';
 
 interface CloseHeaderProps {
   title: string;
 }
 
 const CloseHeader = ({ title }: CloseHeaderProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <Wrapper>
       <HeaderContainer>
         <Title>{title}</Title>
-        <CloseButton onClick={() => navigate(-1)}>
-          <img src={xIcon} alt="닫기" />
+        <CloseButton onClick={() => router.back()}>
+          <Image src="/icons/x.svg" alt="닫기" width={24} height={24} />
         </CloseButton>
       </HeaderContainer>
     </Wrapper>
@@ -37,21 +39,22 @@ const HeaderContainer = styled.header`
   z-index: 1000;
 
   width: 100%;
-  max-width: 450px;
+  max-width: 100%;
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: var(--gr100);
   position: relative;
+  padding: 0 20px;
 `;
 
 const Title = styled.h1`
   font-size: 22px;
   font-weight: 600;
   color: var(--gr20);
-  margin-left: 20px;
   line-height: 100%;
+  flex: 1;
 `;
 
 const CloseButton = styled.button`
@@ -61,7 +64,6 @@ const CloseButton = styled.button`
   display: flex;
   align-items: center;
   padding: 0;
-  margin-right: 18px;
 
   img {
     width: 24px;
