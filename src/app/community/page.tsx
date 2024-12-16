@@ -1,56 +1,65 @@
-import CommunityCard from '@/components/CommunityCard';
-import CommunityTab from '@/components/CommunityTab';
-import Header from '@/components/Header';
-import { useState, useEffect, useRef } from 'react';
+'use client';
 
-const Community = () => {
+import { useEffect, useRef, useState } from 'react';
+import Header from '../components/Header';
+import CommunityTab from '../components/CommunityTab';
+import CommunityCard from '../components/CommunityCard';
+
+export default function Community() {
   const [activeTab, setActiveTab] = useState<number>(() => {
-    const savedTab = window.sessionStorage.getItem('activeTab');
-    return savedTab ? parseInt(savedTab) : 0;
+    if (typeof window !== 'undefined') {
+      const savedTab = window.sessionStorage.getItem('activeTab');
+      return savedTab ? parseInt(savedTab) : 0;
+    }
+    return 0;
   });
 
   const mainRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    // window 전역 객체 사용이 안되어서 React 엘리먼트에 이벤트를 걸기 위한 Ref 사용
-    const mainElement = mainRef.current;
+    if (typeof window !== 'undefined') {
+      // window 전역 객체 사용이 안되어서 React 엘리먼트에 이벤트를 걸기 위한 Ref 사용
+      const mainElement = mainRef.current;
 
-    // 스크롤 위치 복원, 세션스토리지에 저장한 스크롤 위치를 꺼내서 렌더링 시 해당 위치로 이동 시키는 기능
-    const restoreScrollPosition = () => {
-      if (mainElement) {
-        const savedScrollTop = window.sessionStorage.getItem('scrollTop');
-        if (savedScrollTop) {
-          mainElement.scrollTo(0, parseInt(savedScrollTop));
+      // 스크롤 위치 복원, 세션스토리지에 저장한 스크롤 위치를 꺼내서 렌더링 시 해당 위치로 이동 시키는 기능
+      const restoreScrollPosition = () => {
+        if (mainElement) {
+          const savedScrollTop = window.sessionStorage.getItem('scrollTop');
+          if (savedScrollTop) {
+            mainElement.scrollTo(0, parseInt(savedScrollTop));
+          }
         }
-      }
-    };
+      };
 
-    // 컴포넌트 마운트 시 스크롤 위치 복원
-    restoreScrollPosition();
+      // 컴포넌트 마운트 시 스크롤 위치 복원
+      restoreScrollPosition();
 
-    // 스크롤이 발생하면 현재 스크롤 위치를 세션 스토리지에 저장하는 함수
-    const handleScroll = (event: Event) => {
-      const target = event.target as HTMLElement;
-      const scrollTop = target.scrollTop;
-      window.sessionStorage.setItem('scrollTop', scrollTop.toString());
-    };
+      // 스크롤이 발생하면 현재 스크롤 위치를 세션 스토리지에 저장하는 함수
+      const handleScroll = (event: Event) => {
+        const target = event.target as HTMLElement;
+        const scrollTop = target.scrollTop;
+        window.sessionStorage.setItem('scrollTop', scrollTop.toString());
+      };
 
-    // html 요소가 렌더링이 되면 해당 요소에 스크롤 이벤트를 추가, 스크롤이 발생하는 것을 감지
-    if (mainElement) {
-      mainElement.addEventListener('scroll', handleScroll);
-    }
-
-    // 렌더링이 될 때마다 이벤트가 등록되므로 컴포넌트가 언마운트 되면 스크롤 이벤트를 제거하는 CleanUp 부분
-    return () => {
+      // html 요소가 렌더링이 되면 해당 요소에 스크롤 이벤트를 추가, 스크롤이 발생하는 것을 감지
       if (mainElement) {
-        mainElement.removeEventListener('scroll', handleScroll);
+        mainElement.addEventListener('scroll', handleScroll);
       }
-    };
+
+      // 렌더링이 될 때마다 이벤트가 등록되므로 컴포넌트가 언마운트 되면 스크롤 이벤트를 제거하는 CleanUp 부분
+      return () => {
+        if (mainElement) {
+          mainElement.removeEventListener('scroll', handleScroll);
+        }
+      };
+    }
   }, []);
 
   // activeTab이 변경될 때마다 sessionStorage에 저장
   useEffect(() => {
-    window.sessionStorage.setItem('activeTab', activeTab.toString());
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('activeTab', activeTab.toString());
+    }
   }, [activeTab]);
 
   return (
@@ -70,7 +79,7 @@ const Community = () => {
               date,
               likes,
               comments,
-              src
+              src,
             }) => (
               <CommunityCard
                 key={postId}
@@ -95,7 +104,7 @@ const Community = () => {
               date,
               likes,
               comments,
-              src
+              src,
             }) => (
               <CommunityCard
                 key={postId}
@@ -113,7 +122,7 @@ const Community = () => {
       </main>
     </>
   );
-};
+}
 
 interface CommunityData {
   postId: number;
@@ -135,7 +144,7 @@ const lifeData: CommunityData[] = [
     username: '행복한 신부',
     date: new Date('2024-11-06'),
     likes: 30,
-    comments: 10
+    comments: 10,
   },
   {
     postId: 1,
@@ -146,7 +155,7 @@ const lifeData: CommunityData[] = [
     date: new Date('2024-10-31'),
     likes: 2,
     comments: 13,
-    src: '/images/card-banner-bg.png'
+    src: '/images/card-banner-bg.png',
   },
   {
     postId: 2,
@@ -155,7 +164,7 @@ const lifeData: CommunityData[] = [
     username: '힘든 예비신랑',
     date: new Date('2024-10-15'),
     likes: 21,
-    comments: 0
+    comments: 0,
   },
   {
     postId: 3,
@@ -165,7 +174,7 @@ const lifeData: CommunityData[] = [
     username: '음악 좋아하는 신랑',
     date: new Date('2024-10-14'),
     likes: 0,
-    comments: 2
+    comments: 2,
   },
   {
     postId: 4,
@@ -176,8 +185,8 @@ const lifeData: CommunityData[] = [
     date: new Date('2024-08-28'),
     likes: 12,
     comments: 0,
-    src: '/images/card-banner-bg.png'
-  }
+    src: '/images/card-banner-bg.png',
+  },
 ];
 
 const tipData: CommunityData[] = [
@@ -190,7 +199,7 @@ const tipData: CommunityData[] = [
     date: new Date('2024-11-05'),
     likes: 18,
     comments: 5,
-    src: '/images/card-banner-bg.png'
+    src: '/images/card-banner-bg.png',
   },
   {
     postId: 1,
@@ -200,7 +209,7 @@ const tipData: CommunityData[] = [
     date: new Date('2024-10-25'),
     likes: 12,
     comments: 3,
-    src: '/images/card-banner-bg.png'
+    src: '/images/card-banner-bg.png',
   },
   {
     postId: 2,
@@ -209,7 +218,7 @@ const tipData: CommunityData[] = [
     username: '박영희 상담사',
     date: new Date('2024-10-20'),
     likes: 25,
-    comments: 8
+    comments: 8,
   },
   {
     postId: 3,
@@ -218,7 +227,7 @@ const tipData: CommunityData[] = [
     username: '김철수 상담사',
     date: new Date('2024-10-18'),
     likes: 25,
-    comments: 8
+    comments: 8,
   },
   {
     postId: 4,
@@ -229,8 +238,6 @@ const tipData: CommunityData[] = [
     date: new Date('2024-10-20'),
     likes: 25,
     comments: 8,
-    src: '/images/card-banner-bg.png'
-  }
+    src: '/images/card-banner-bg.png',
+  },
 ];
-
-export default Community;
