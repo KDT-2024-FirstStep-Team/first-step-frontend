@@ -30,12 +30,13 @@ const CardContainer = styled.div`
   border-radius: 8px;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 `;
 
 const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
 `;
 
 const HeartContainer = styled.div`
@@ -48,6 +49,7 @@ const HeartContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2px;
+  box-sizing: border-box;
 `;
 
 const HeartIcon = styled.img`
