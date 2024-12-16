@@ -1,4 +1,7 @@
-import { useNavigate } from 'react-router-dom';
+'use client';
+
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
 interface CommunityCardProps {
@@ -20,13 +23,13 @@ const CommunityCard = ({
   date,
   likes,
   comments,
-  src
+  src,
 }: CommunityCardProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const formattedDate = date.toISOString().split('T')[0].replace(/-/g, '.');
 
   const handleCardClick = () => {
-    navigate('/community/detail', { state: { postId } });
+    router.push(`/community/detail?postId=${postId}`);
   };
 
   return (
@@ -42,20 +45,25 @@ const CommunityCard = ({
           </InfoContainer>
         </ContentWrapper>
         {src && (
-          <Image>
-            <img src={src} alt="Image" />
-          </Image>
+          <ImageWrapper>
+            <Image src={src} alt="Image" width={72} height={72} />
+          </ImageWrapper>
         )}
       </ImageContentWrapper>
 
       {/* 좋아요와 댓글 */}
       <StatBoxContainer>
         <StatBox>
-          <img src="/icons/likes.svg" alt="Likes" />
+          <Image src="/icons/likes.svg" alt="Likes" width={13} height={13} />
           <span>{likes}</span>
         </StatBox>
         <StatBox>
-          <img src="/icons/comments.svg" alt="Comments" />
+          <Image
+            src="/icons/comments.svg"
+            alt="Comments"
+            width={12}
+            height={13}
+          />
           <span>{comments}</span>
         </StatBox>
       </StatBoxContainer>
@@ -102,7 +110,7 @@ const ContentWrapper = styled.div`
   gap: 6px;
 `;
 
-const Image = styled.div`
+const ImageWrapper = styled.div`
   width: 72px;
   height: 72px;
   border-radius: 8px;
