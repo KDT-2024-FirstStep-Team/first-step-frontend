@@ -5,7 +5,7 @@ import BackHeader from '../../components/BackHeader';
 
 export default function CommunityDetail() {
   const searchParams = useSearchParams();
-  const postId = searchParams.get('postId');
+  const postId = searchParams?.get('postId') || '알 수 없음';
 
   return (
     <>
