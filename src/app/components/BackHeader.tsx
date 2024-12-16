@@ -40,6 +40,7 @@ const HeaderContainer = styled.header`
   position: fixed; /* 상단에 고정 */
   top: 0;
   z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+  box-sizing: border-box;
 `;
 
 const BackButton = styled.button`

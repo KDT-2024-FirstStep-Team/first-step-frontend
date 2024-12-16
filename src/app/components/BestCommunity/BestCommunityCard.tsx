@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 
 interface BestCommunityCardProps {
@@ -11,7 +13,7 @@ const BestCommunityCard = ({
   name,
   title,
   content,
-  date
+  date,
 }: BestCommunityCardProps) => {
   const formattedDate = date.toISOString().split('T')[0].replace(/-/g, '.');
 
@@ -31,6 +33,10 @@ const CardContainer = styled.div`
   background-color: var(--gr90);
   border-radius: 8px;
   padding: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 `;
 
 const Name = styled.p`
@@ -54,7 +60,6 @@ const Content = styled.p`
   line-height: 19px;
   height: 38px;
   color: var(--gr50);
-  margin: 4px 0px;
   display: -webkit-box; /* Flexbox 기반 레이아웃을 사용 */
   -webkit-line-clamp: 2; /* 최대 2줄까지만 표시 */
   -webkit-box-orient: vertical; /* 박스 방향을 세로로 설정 */

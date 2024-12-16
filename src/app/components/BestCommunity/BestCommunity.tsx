@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import BestCommunityCard from './BestCommunityCard';
 import CategoryHeader from '../shared/CategoryHeader';
@@ -33,22 +35,22 @@ const communityData: CommunityData[] = [
     name: '행복한 신부',
     title: '파혼할까 고민입니다..',
     content: '안녕하세요. 한 줄일 경우에요.',
-    date: new Date('2024-11-04')
+    date: new Date('2024-11-04'),
   },
   {
     name: '슬픈 신랑',
     title: '결혼식 준비가 너무 힘들어요.',
     content:
       '안녕하세요. 결혼식 준비가 생각보다 너무 어렵고 스트레스가 많습니다. 조언 부탁드립니다.',
-    date: new Date('2024-10-30')
+    date: new Date('2024-10-30'),
   },
   {
     name: '기쁜 친구',
     title: '친구 결혼식에서 축사를 해야 합니다.',
     content:
       '안녕하세요. 친구 결혼식에서 축사를 해야 하는데 긴장이 많이 됩니다. 어떻게 하면 좋을까요?',
-    date: new Date('2024-10-25')
-  }
+    date: new Date('2024-10-25'),
+  },
 ];
 
 const BestCommunityCardsContainer = styled.div`

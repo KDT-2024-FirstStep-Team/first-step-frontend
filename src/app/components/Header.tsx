@@ -1,10 +1,13 @@
+'use client';
+
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import arrowDownIcon from '/icons/Dropdown.svg';
-import searchIcon from '/icons/search.svg';
-import notificationIcon from '/icons/notification.svg';
+import arrowDownIcon from '../../../public/icons/Dropdown.svg';
+import searchIcon from '../../../public/icons/search.svg';
+import notificationIcon from '../../../public/icons/notification.svg';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface HeaderProps {
   title: string;
@@ -17,9 +20,9 @@ const Header = ({
   title,
   showDropdownIcon = true,
   showSearchIcon = true,
-  showNotificationIcon = true
+  showNotificationIcon = true,
 }: HeaderProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen(!isDropdownOpen);
@@ -30,31 +33,36 @@ const Header = ({
         <Title>{title}</Title>
         {showDropdownIcon && (
           <DropdownButton onClick={toggleDropdown}>
-            <img src={arrowDownIcon} alt="Dropdown" />
+            <Image src={arrowDownIcon} alt="Dropdown" width={20} height={20} />
           </DropdownButton>
         )}
       </TitleContainer>
 
       <IconsContainer>
         {showSearchIcon && (
-          <IconButton onClick={() => navigate('/search')}>
-            <img src={searchIcon} alt="Search" />
+          <IconButton onClick={() => router.push('/search')}>
+            <Image src={searchIcon} alt="Search" width={24} height={24} />
           </IconButton>
         )}
 
         {showNotificationIcon && (
-          <IconButton onClick={() => navigate('/notifications')}>
-            <img src={notificationIcon} alt="Notifications" />
+          <IconButton onClick={() => router.push('/notifications')}>
+            <Image
+              src={notificationIcon}
+              alt="Notifications"
+              width={24}
+              height={24}
+            />
           </IconButton>
         )}
       </IconsContainer>
 
       {isDropdownOpen && (
         <DropdownMenu>
-          <DropdownItem onClick={() => navigate('/consultant')}>
+          <DropdownItem onClick={() => router.push('/consultant')}>
             상담
           </DropdownItem>
-          <DropdownItem onClick={() => navigate('/analysis')}>
+          <DropdownItem onClick={() => router.push('/analysis')}>
             성향분석
           </DropdownItem>
         </DropdownMenu>
