@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react';
-import sendIcon from '/icons/send.svg';
+import styled from 'styled-components';
+
+const sendIcon = '/icons/send.svg';
 
 interface ChatInputProps {
   postId: string;
@@ -28,7 +30,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          content: newComment,
+          content: newComment.trim(),
           writerId: userId,
           boardId: postId,
           nickname,
@@ -42,21 +44,18 @@ const ChatInput: React.FC<ChatInputProps> = ({
     }
   };
 
-  const autoScroll = () => {
-    if (textareaRef.current) {
-      textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
-    }
-  };
-
   return (
-    <div style={styles.messageInput}>
-      <textarea
+    <InputContainer>
+      <TextArea
         ref={textareaRef}
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
-        placeholder=""
-        style={styles.inputField}
-        onInput={autoScroll}
+        placeholder="메시지를 입력하세요..."
+        onInput={() => {
+          if (textareaRef.current) {
+            textareaRef.current.scrollTop = textareaRef.current.scrollHeight;
+          }
+        }}
         onKeyUp={(e) => {
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -64,50 +63,60 @@ const ChatInput: React.FC<ChatInputProps> = ({
           }
         }}
       />
-      <img
+      <SendIcon
         src={sendIcon}
         alt="전송"
-        style={styles.iconSend}
         onClick={submitComment}
+        disabled={!newComment.trim()} // 입력값 없을 때 비활성화
       />
-    </div>
+    </InputContainer>
   );
 };
 
-const styles: { [key: string]: React.CSSProperties } = {
-  messageInput: {
-    borderRadius: '12px 12px 0px 0px',
-    borderTop: '0.5px solid var(--gr70)',
-    background: 'var(--gr100)',
-    display: 'flex',
-    alignItems: 'center',
-    padding: '8px 20px 42px 20px',
-    width: '375px',
-    boxSizing: 'border-box',
-    boxShadow: '0px 0px 20px 0px rgba(62, 68, 78, 0.1)',
-  },
-  inputField: {
-    width: '301px',
-    height: '40px',
-    padding: '10px 16px',
-    border: 'none',
-    borderRadius: '40px',
-    background: 'var(--gr90)',
-    fontSize: '16px',
-    outline: 'none',
-    marginRight: '10px',
-    boxSizing: 'border-box',
-    resize: 'none',
-    overflowY: 'auto',
-    lineHeight: '16px',
-    flexGrow: 1,
-    color: 'var(--gr30)',
-  },
-  iconSend: {
-    width: '24px',
-    height: '24px',
-    cursor: 'pointer',
-  },
-};
-
 export default ChatInput;
+
+const InputContainer = styled.div`
+  border-radius: 12px 12px 0px 0px;
+  border-top: 0.5px solid var(--gr70);
+  background: var(--gr100);
+  display: flex;
+  align-items: center;
+  padding: 8px 20px 42px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 20px 0px rgba(62, 68, 78, 0.1);
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 40px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 40px;
+  background: var(--gr90);
+  font-size: 16px;
+  outline: none;
+  margin-right: 10px;
+  box-sizing: border-box;
+  resize: none;
+  overflow-y: auto;
+  line-height: 16px;
+  flex-grow: 1;
+  color: var(--gr30);
+
+  &::placeholder {
+    color: var(--gr70);
+  }
+`;
+
+const SendIcon = styled.img<{ disabled: boolean }>`
+  width: 24px;
+  height: 24px;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: ${(props) => (props.disabled ? 0.5 : 0.8)};
+  }
+`;
