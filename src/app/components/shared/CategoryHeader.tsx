@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom';
+'use client';
+
+import Link from 'next/link';
 import styled from 'styled-components';
 
 interface CategoryHeaderProps {
@@ -9,7 +11,7 @@ const CategoryHeader = ({ title }: CategoryHeaderProps) => {
   return (
     <HeaderContainer>
       <HeaderText>{title}</HeaderText>
-      <NavText to={'/community'}>전체보기 &gt;</NavText>
+      <NavText href={'/community'}>전체보기 &gt;</NavText>
     </HeaderContainer>
   );
 };
@@ -21,6 +23,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-sizing: border-box;
 `;
 
 const HeaderText = styled.span`
