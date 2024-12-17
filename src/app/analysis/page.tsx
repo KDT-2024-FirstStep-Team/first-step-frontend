@@ -1,7 +1,6 @@
-import React from 'react';
-import Header from '@/components/Header';
+import Header from '../components/Header';
 
-const Analysis = () => {
+export default function Analysis() {
   return (
     <div>
       <Header
@@ -14,6 +13,4 @@ const Analysis = () => {
       </main>
     </div>
   );
-};
-
-export default Analysis;
+}
