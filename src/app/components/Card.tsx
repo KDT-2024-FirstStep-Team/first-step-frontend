@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import StarIcon from '/icons/star.svg';
-import DefaultProfileIcon from '/icons/profile-s.svg';
+
+const StarIcon = '/icons/star.svg';
+const DefaultProfileIcon = '/icons/profile-s.svg';
 
 type CardProps = {
   name: string;
@@ -18,19 +19,23 @@ const Card: React.FC<CardProps> = ({
   consultations,
   badge,
   description,
-  imageUrl,
+  imageUrl = DefaultProfileIcon,
 }) => {
   return (
     <CardContainer>
-      <ProfileImage src={imageUrl || DefaultProfileIcon} alt="Profile" />
+      <ProfileImage src={imageUrl} alt={`${name} 상담사 프로필`} />
       <InfoContainer>
         <Name>{name} 상담사</Name>
         <RatingContainer>
           <RatingBadge>
-            <Icon src={StarIcon} alt="Star" />
-            <Rating>{rating}</Rating>
+            <img
+              src={StarIcon}
+              alt="별점"
+              style={{ width: '10px', height: '10px', marginRight: '4px' }}
+            />
+            <Rating>{rating.toFixed(1)}</Rating>
           </RatingBadge>
-          <Badge>{consultations}회 쀼 상담</Badge>
+          <Badge>{consultations}회 상담</Badge>
           <Badge>{badge}</Badge>
         </RatingContainer>
         <Description>{description}</Description>
@@ -39,13 +44,18 @@ const Card: React.FC<CardProps> = ({
   );
 };
 
+export default Card;
+
 const CardContainer = styled.div`
-  width: 375px;
-  height: 112px;
+  width: 100%;
+  max-width: 375px;
   display: flex;
-  padding: 20px;
-  border: none;
-  position: relative;
+  padding: 16px;
+  border: 1px solid var(--gr80);
+  border-radius: 8px;
+  background-color: var(--gr100);
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const ProfileImage = styled.img`
@@ -53,11 +63,14 @@ const ProfileImage = styled.img`
   height: 72px;
   border-radius: 8px;
   object-fit: cover;
+  background-color: var(--gr90);
 `;
 
 const InfoContainer = styled.div`
   margin-left: 14px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Name = styled.div`
@@ -65,13 +78,13 @@ const Name = styled.div`
   margin-bottom: 8px;
   font-size: 18px;
   font-weight: 600;
-  line-height: 100%;
+  line-height: 1.2;
 `;
 
 const RatingContainer = styled.div`
   display: flex;
-  height: 11px
   align-items: center;
+  gap: 6px;
   margin-bottom: 10px;
 `;
 
@@ -82,7 +95,6 @@ const RatingBadge = styled.div`
   color: var(--gr40);
   border-radius: 4px;
   padding: 4px 6px;
-  margin-right: 6px;
 `;
 
 const Icon = styled.img`
@@ -92,9 +104,8 @@ const Icon = styled.img`
 `;
 
 const Rating = styled.span`
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  line-height: 100%;
 `;
 
 const Badge = styled.span`
@@ -103,20 +114,15 @@ const Badge = styled.span`
   border-radius: 4px;
   padding: 4px 6px;
   font-size: 11px;
-  margin-right: 6px;
   font-weight: 500;
-  line-height: 100%;
 `;
 
 const Description = styled.p`
   color: var(--gr50);
   font-size: 13px;
   font-weight: 400;
-  line-height: 100%;
+  line-height: 1.4;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 243px;
+  white-space: nowrap;
 `;
-
-export default Card;
