@@ -52,8 +52,8 @@ const navItems: NavItem[] = [
     inactiveIcon: '/icons/counselor-inactive.svg',
   },
   {
-    name: '쀼',
-    path: '/question',
+    name: '분석',
+    path: '/analysis',
     activeIcon: '/icons/bbu-active.svg',
     inactiveIcon: '/icons/bbu-inactive.svg',
   },
