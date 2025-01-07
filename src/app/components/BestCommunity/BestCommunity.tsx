@@ -4,54 +4,32 @@ import styled from 'styled-components';
 import BestCommunityCard from './BestCommunityCard';
 import CategoryHeader from '../shared/CategoryHeader';
 
-const BestCommunity = () => {
+interface Post {
+  postId: number;
+  nickname: string;
+  title: string;
+  content: string;
+  registerDate: string;
+}
+
+const BestCommunity = ({ bestPost }: { bestPost: Array<Post> }) => {
   return (
     <>
       <CategoryHeader title="커뮤니티 베스트"></CategoryHeader>
       <BestCommunityCardsContainer>
-        {communityData.map((item, index) => (
+        {bestPost.map((item) => (
           <BestCommunityCard
-            key={index}
-            name={item.name}
+            key={item.postId}
+            name={item.nickname}
             title={item.title}
             content={item.content}
-            date={item.date}
+            date={new Date(item.registerDate)}
           />
         ))}
       </BestCommunityCardsContainer>
     </>
   );
 };
-
-interface CommunityData {
-  name: string;
-  title: string;
-  content: string;
-  date: Date;
-}
-
-const communityData: CommunityData[] = [
-  {
-    name: '행복한 신부',
-    title: '파혼할까 고민입니다..',
-    content: '안녕하세요. 한 줄일 경우에요.',
-    date: new Date('2024-11-04'),
-  },
-  {
-    name: '슬픈 신랑',
-    title: '결혼식 준비가 너무 힘들어요.',
-    content:
-      '안녕하세요. 결혼식 준비가 생각보다 너무 어렵고 스트레스가 많습니다. 조언 부탁드립니다.',
-    date: new Date('2024-10-30'),
-  },
-  {
-    name: '기쁜 친구',
-    title: '친구 결혼식에서 축사를 해야 합니다.',
-    content:
-      '안녕하세요. 친구 결혼식에서 축사를 해야 하는데 긴장이 많이 됩니다. 어떻게 하면 좋을까요?',
-    date: new Date('2024-10-25'),
-  },
-];
 
 const BestCommunityCardsContainer = styled.div`
   display: flex;
