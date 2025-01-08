@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Header from '../components/Header';
 import DropdownCategory from '../components/DropdownCategory';
 import Card from '../components/Card';
+import NavBar from '../components/NavBar'; // 하단 네비게이션 컴포넌트 추가
 
 const Counselor: React.FC = () => {
   const dropdownOptions = ['인기순', '만족도순'];
@@ -43,6 +44,7 @@ const Counselor: React.FC = () => {
           />
         </CardList>
       </MainContent>
+      <NavBar /> {/* 하단 네비게이션 추가 */}
     </Container>
   );
 };

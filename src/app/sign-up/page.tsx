@@ -20,36 +20,39 @@ const SignUp = () => {
   const [error, setError] = useState('');
   const [dummyVerificationCode, setDummyVerificationCode] = useState('');
 
-  const checkNicknameAvailability = async (value: string) => {
-    const dummyNicknames = ['홍길동'];
-    return !dummyNicknames.includes(value);
-  };
-
-  const checkEmailAvailability = async (value: string) => {
-    const dummyEmails = ['existing@example.com'];
-    return !dummyEmails.includes(value);
-  };
-
-  const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setNickname(e.target.value);
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setEmail(e.target.value);
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setPassword(e.target.value);
-  const handleWeddingDateChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setWeddingDate(e.target.value);
-  const toggleNoWeddingDate = () => {
-    setNoWeddingDate(!noWeddingDate);
-    if (!noWeddingDate) {
-      setWeddingDate('');
+  const handleSignUp = async () => {
+    if (!nickname || !email || !password || (!weddingDate && !noWeddingDate)) {
+      setError('모든 필드를 입력해주세요.');
+      return;
     }
-  };
 
-  const handleSignUp = () => {
-    if (nickname && email && password && (weddingDate || noWeddingDate)) {
-      console.log('회원가입 성공');
-    } else {
-      setError('회원가입 실패');
+    try {
+      const response = await fetch('http://localhost:8080/api/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nickname,
+          email,
+          password,
+          gender: 'MALE',
+          age: 20,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.isSuccess) {
+        console.log('회원가입 성공:', data.message);
+        // 성공 후 이동
+      } else {
+        console.error('회원가입 실패:', data.message);
+        setError(data.message || '회원가입 중 문제가 발생했습니다.');
+      }
+    } catch (error) {
+      console.error('회원가입 요청 중 오류 발생:', error);
+      setError('서버와 통신 중 오류가 발생했습니다.');
     }
   };
 
@@ -59,11 +62,6 @@ const SignUp = () => {
     const generatedCode = '123456'; // 더미 인증 코드
     setDummyVerificationCode(generatedCode);
     console.log(`인증 코드가 전송되었습니다: ${generatedCode}`);
-    // API 요청 추가 부분
-    // fetch('/api/send-verification', {
-    //   method: 'POST',
-    //   body: JSON.stringify({ email }),
-    // }).then(/* 응답 처리 */);
   };
 
   useEffect(() => {
@@ -92,8 +90,7 @@ const SignUp = () => {
             <TextInput
               label="닉네임"
               placeholder="닉네임을 입력하세요"
-              onChange={handleNicknameChange}
-              checkAvailability={checkNicknameAvailability}
+              onChange={(e) => setNickname(e.target.value)}
             />
             {error && <ErrorMessage>{error}</ErrorMessage>}
           </FormGroup>
@@ -103,8 +100,7 @@ const SignUp = () => {
               label="이메일 주소"
               placeholder="이메일 입력"
               type="email"
-              onChange={handleEmailChange}
-              checkAvailability={checkEmailAvailability}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </FormGroup>
 
@@ -130,7 +126,7 @@ const SignUp = () => {
               label="비밀번호"
               placeholder="영문+숫자 8자 이상"
               type="password"
-              onChange={handlePasswordChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </FormGroup>
 
@@ -143,10 +139,10 @@ const SignUp = () => {
                   : '날짜를 선택하세요'
               }
               value={weddingDate}
-              onChange={handleWeddingDateChange}
+              onChange={(e) => setWeddingDate(e.target.value)}
               disabled={noWeddingDate}
             />
-            <CheckboxWrapper onClick={toggleNoWeddingDate}>
+            <CheckboxWrapper onClick={() => setNoWeddingDate(!noWeddingDate)}>
               <Image
                 src={
                   noWeddingDate ? '/icons/check-active.svg' : '/icons/check.svg'
@@ -172,6 +168,8 @@ const SignUp = () => {
     </Wrapper>
   );
 };
+
+export default SignUp;
 
 const Wrapper = styled.div`
   display: flex;
@@ -308,5 +306,3 @@ const CustomDateInput = styled.input.attrs({ type: 'date' })`
     background-color: var(--gr90);
   }
 `;
-
-export default SignUp;
