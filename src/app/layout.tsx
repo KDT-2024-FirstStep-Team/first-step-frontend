@@ -25,7 +25,6 @@ export default function RootLayout({
       <body className="app-container">
         <StyledComponentsRegistry>
           <GlobalStyles />
-          <NavBar />
           {children}
         </StyledComponentsRegistry>
       </body>

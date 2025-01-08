@@ -15,16 +15,29 @@ const Login = () => {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
-  const dummyUser = {
-    email: 'test@naver.com',
-    password: '12345678',
-  };
+  const onLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-  const onLogin = () => {
-    if (email === dummyUser.email && password === dummyUser.password) {
-      localStorage.setItem('token', 'dummy_token');
-      router.push('/');
-    } else {
+      const data = await response.json();
+
+      if (response.ok && data.isSuccess) {
+        localStorage.setItem('token', data.token);
+        router.push('/');
+      } else {
+        setShowModal(true);
+      }
+    } catch (error) {
+      console.error('로그인 요청 중 오류 발생:', error);
       setShowModal(true);
     }
   };
@@ -69,6 +82,8 @@ const Login = () => {
   );
 };
 
+export default Login;
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -94,6 +109,7 @@ const ContentContainer = styled.div`
   justify-content: space-between;
   width: 100%;
   flex: 1;
+  padding: 20px;
 `;
 
 const InputContainer = styled.div`
@@ -110,5 +126,3 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
-
-export default Login;

@@ -2,6 +2,7 @@ import BestContentBanner from './components/BestContentBanner';
 import BestCommunity from './components/BestCommunity/BestCommunity';
 import CardBanner from './components/CardBanner';
 import HomeHeader from './components/HomeHeader';
+import NavBar from './components/NavBar';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         userGuideSmallText="쀼의 세계가 처음이라면?"
         userGuideBigText="실제 쀼가 알려주는 사용설명서"
       />
+      <NavBar />
     </div>
   );
 }
